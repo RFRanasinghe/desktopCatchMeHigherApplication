@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "861575985303",
+    "project_id": "desktopappdatabase",
+    "storage_bucket": "desktopappdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861575985303:android:3500632a5b37e37a71d1d2",
+        "android_client_info": {
+          "package_name": "com.example.desktopcatchmehigher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "861575985303-dfb3b07rmmgt225v8689uqojki5s1ufd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZ0Z-NZchbLzofH0XTOiX-A866fuJiytU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "861575985303-dfb3b07rmmgt225v8689uqojki5s1ufd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
