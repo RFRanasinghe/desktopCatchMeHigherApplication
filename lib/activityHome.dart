@@ -34,7 +34,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
           new ElevatedButton(
             child: new Text("Counting Numbers"),
             onPressed: () {
-              Navigator.pushNamed(context, '');
+              Navigator.pushNamed(context, 'countingNum');
             }
           ),
           new ElevatedButton(
