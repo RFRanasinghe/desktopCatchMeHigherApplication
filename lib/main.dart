@@ -1,6 +1,7 @@
 import 'dart:js';
 
 import 'package:desktopcatchmehigher/activityHome.dart';
+import 'package:desktopcatchmehigher/colorFilling.dart';
 import 'package:desktopcatchmehigher/colorSelection.dart';
 import 'package:desktopcatchmehigher/welcomepage.dart';
 import 'package:desktopcatchmehigher/existingprofile.dart';
@@ -17,7 +18,8 @@ void main() {
       'newprofile': (context) => NewProfile(),
       'existingprofile': (context) => ExistingProfile(),
       'activityHome':(context) => ActivityHomePage(),
-      'colorSelection':(context) => ColorSelection()
+      'colorSelection':(context) => ColorSelection(),
+      'colorFilling':(context) => ColorFillingPage()
     },
   ));
 }
