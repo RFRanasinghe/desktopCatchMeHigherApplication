@@ -18,6 +18,11 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image:AssetImage('images/welcomeImg.jpg'),
+          ),
+        ),
         child: Row(
           children: <Widget>[
             new ElevatedButton(

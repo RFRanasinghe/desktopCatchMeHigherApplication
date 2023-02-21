@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     title: "Catch Me Higher with Down Syndrome",
+    debugShowCheckedModeBanner: false,
     initialRoute: 'welcomepage',
     routes: {
       'welcomepage': (context) => WelcomePage(),
