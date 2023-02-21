@@ -32,9 +32,9 @@ class _NewProfileState extends State<NewProfile> {
             ),
             Center(
               child: ElevatedButton(
-                child: Text("New Profile Button"),
+                child: Text("Activity Area"),
                 onPressed: () {
-                  Navigator.pushNamed(context, 'existingprofile');
+                  Navigator.pushNamed(context, 'activityHome');
                 },
               ),
             ),

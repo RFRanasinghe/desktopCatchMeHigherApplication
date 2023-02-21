@@ -12,11 +12,17 @@ class _ExistingProfileState extends State<ExistingProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Existing Profile"),
+        appBar: AppBar(
+          title: Center(
+            child: Text("Existing Profile"),
+          ),
         ),
-      ),
-    );
+        body: Center(
+          child: ElevatedButton(
+              child: Text("Activity Home"),
+              onPressed: () {
+                Navigator.pushNamed(context, 'activityHome');
+              }),
+        ));
   }
 }

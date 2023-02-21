@@ -17,26 +17,28 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Text("Welcome Page"),
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image:AssetImage('images/welcomeImg.jpg'),
-          ),
-        ),
-        child: Row(
-          children: <Widget>[
-            new ElevatedButton(
-              child: new Text("Create Profile"),
-              onPressed: () {
-                Navigator.pushNamed(context, 'newprofile');
-              },
+      body: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image:AssetImage('images/welcomeImg.jpg'),
             ),
-            new ElevatedButton(
-                child: new Text("Existing Profile"),
+          ),
+          child: Row(
+            children: <Widget>[
+              new ElevatedButton(
+                child: new Text("Create Profile"),
                 onPressed: () {
-                  Navigator.pushNamed(context, 'existingprofile');
-                })
-          ],
+                  Navigator.pushNamed(context, 'newprofile');
+                },
+              ),
+              new ElevatedButton(
+                  child: new Text("Existing Profile"),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'existingprofile');
+                  })
+            ],
+          ),
         ),
       ),
     );
