@@ -40,7 +40,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
           new ElevatedButton(
               child: new Text("Pattern Recognition"),
               onPressed: () {
-                Navigator.pushNamed(context, '');
+                Navigator.pushNamed(context, 'patternRecognition');
               })
         ],
       )),

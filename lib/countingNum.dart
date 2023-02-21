@@ -11,6 +11,12 @@ class CountingNumbers extends StatefulWidget {
 class _CountingNumbersState extends State<CountingNumbers> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text("Counting Numbers Activity"),
+        ),
+      ),
+    );
   }
 }
