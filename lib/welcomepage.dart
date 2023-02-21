@@ -17,12 +17,21 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Text("Welcome Page"),
         ),
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text("Welcome Screen Button"),
-          onPressed: () {
-            Navigator.pushNamed(context, 'newprofile');
-          },
+      body: Container(
+        child: Row(
+          children: <Widget>[
+            new ElevatedButton(
+              child: new Text("Create Profile"),
+              onPressed: () {
+                Navigator.pushNamed(context, 'newprofile');
+              },
+            ),
+            new ElevatedButton(
+                child: new Text("Existing Profile"),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'existingprofile');
+                })
+          ],
         ),
       ),
     );
