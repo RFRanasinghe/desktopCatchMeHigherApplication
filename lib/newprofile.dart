@@ -38,6 +38,8 @@ class _NewProfileState extends State<NewProfile> {
                     icon: const Icon(Icons.email),
                     hintText: 'Enter your email address',
                     labelText: 'Email address',
+                    fillColor: Colors.white,
+                    filled: true,
                   ),
                 ),
                 new Container(
