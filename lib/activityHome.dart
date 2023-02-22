@@ -17,33 +17,41 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
           child: Text("Activity House"),
         ),
       ),
-      body: Container(
-          child: Column(
-        children: <Widget>[
-          new ElevatedButton(
-            child: new Text("Color Selection"),
-            onPressed: () {
-              Navigator.pushNamed(context, 'colorSelection');
-            },
-          ),
-          new ElevatedButton(
-              child: new Text("Color Filling"),
-              onPressed: () {
-                Navigator.pushNamed(context, 'colorFilling');
-              }),
-          new ElevatedButton(
-            child: new Text("Counting Numbers"),
-            onPressed: () {
-              Navigator.pushNamed(context, 'countingNum');
-            }
-          ),
-          new ElevatedButton(
-              child: new Text("Pattern Recognition"),
-              onPressed: () {
-                Navigator.pushNamed(context, 'patternRecognition');
-              })
-        ],
-      )),
+      body: Center(
+        child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/papertool.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Column(
+              children: <Widget>[
+                new ElevatedButton(
+                  child: new Text("Color Selection"),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'colorSelection');
+                  },
+                ),
+                new ElevatedButton(
+                    child: new Text("Color Filling"),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'colorFilling');
+                    }),
+                new ElevatedButton(
+                    child: new Text("Counting Numbers"),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'countingNum');
+                    }),
+                new ElevatedButton(
+                    child: new Text("Pattern Recognition"),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'patternRecognition');
+                    })
+              ],
+            )),
+      ),
     );
   }
 }
