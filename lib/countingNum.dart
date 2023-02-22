@@ -17,6 +17,16 @@ class _CountingNumbersState extends State<CountingNumbers> {
           child: Text("Counting Numbers Activity"),
         ),
       ),
+      body: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/bLScreen.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

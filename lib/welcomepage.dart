@@ -19,9 +19,11 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
       body: Center(
         child: Container(
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image:AssetImage('images/welcomeImg.jpg'),
+              image: AssetImage('images/papertool.jpg'),
+              fit: BoxFit.cover,
             ),
           ),
           child: Row(
