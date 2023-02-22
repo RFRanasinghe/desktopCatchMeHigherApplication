@@ -13,8 +13,19 @@ class _ColorSelectionState extends State<ColorSelection> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Center(
+        title: Center(
           child: Text("Color Selection Activity"),
+        ),
+      ),
+      body: Center(
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/galaxy.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
       ),
     );

@@ -21,7 +21,7 @@ class _CountingNumbersState extends State<CountingNumbers> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('images/bLScreen.jpg'),
+              image: AssetImage('images/galaxy.png'),
               fit: BoxFit.cover,
             ),
           ),

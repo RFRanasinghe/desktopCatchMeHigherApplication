@@ -15,7 +15,18 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
       appBar: AppBar(
         title: Center(
           child: Text("Color Filling Activity"),
+        ),
+      ),
+      body: Center(
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/galaxy.png'),
+              fit: BoxFit.cover,
+            ),
           ),
+        ),
       ),
     );
   }
