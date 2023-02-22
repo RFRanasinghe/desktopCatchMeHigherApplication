@@ -9,6 +9,9 @@ class NewProfile extends StatefulWidget {
 }
 
 class _NewProfileState extends State<NewProfile> {
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,27 +21,38 @@ class _NewProfileState extends State<NewProfile> {
         ),
       ),
       body: Container(
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/welcomeImg.jpg'),
+            image: AssetImage('images/tree.png'),
+            fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
-              child: Center(child: Text("Hello")),
-            ),
-            Center(
-              child: ElevatedButton(
-                child: Text("Activity Area"),
-                onPressed: () {
-                  Navigator.pushNamed(context, 'activityHome');
-                },
+
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      icon: const Icon(Icons.email),
+                      hintText: 'Enter your email address',
+                      labelText: 'Email address',
+                    ),
+                  ),
+                  new Container(
+                    child: new ElevatedButton(
+                      child: const Text('Submit'),
+                      onPressed: null,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
+          ]
         ),
       ),
     );
