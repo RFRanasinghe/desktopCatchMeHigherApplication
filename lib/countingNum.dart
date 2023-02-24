@@ -19,11 +19,17 @@ class _CountingNumbersState extends State<CountingNumbers> {
       ),
       body: Center(
         child: Container(
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('images/galaxy.png'),
               fit: BoxFit.cover,
             ),
+          ),
+          child: Container(
+            width: 1300,
+            height: 600,
+            color: Colors.white,
           ),
         ),
       ),

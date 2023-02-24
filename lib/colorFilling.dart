@@ -26,6 +26,11 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
               fit: BoxFit.cover,
             ),
           ),
+          child: Container(
+            width: 1300,
+            height: 600,
+            color: Colors.white,
+          ),
         ),
       ),
     );
