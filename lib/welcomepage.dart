@@ -29,13 +29,27 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Row(
             children: <Widget>[
               new ElevatedButton(
-                child: new Text("Create Profile"),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: new Text(
+                    "Create Profile",
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  ),
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, 'newprofile');
                 },
               ),
               new ElevatedButton(
-                  child: new Text("Existing Profile"),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: new Text(
+                      "Existing Profile",
+                      style: TextStyle(fontSize: 30),
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.pushNamed(context, 'existingprofile');
                   })

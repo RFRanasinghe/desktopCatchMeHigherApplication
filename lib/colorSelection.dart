@@ -27,9 +27,9 @@ class _ColorSelectionState extends State<ColorSelection> {
             ),
           ),
           child: Container(
-            width:1300,
-            height:600,
-            color:Colors.white,
+            width: 1300,
+            height: 600,
+            color: Colors.white,
           ),
         ),
       ),

@@ -29,23 +29,43 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
             child: Column(
               children: <Widget>[
                 new ElevatedButton(
-                  child: new Text("Color Selection"),
+                  child: new Text(
+                    "Color Selection",
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.pushNamed(context, 'colorSelection');
                   },
                 ),
                 new ElevatedButton(
-                    child: new Text("Color Filling"),
+                    child: new Text(
+                      "Color Filling",
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'colorFilling');
                     }),
                 new ElevatedButton(
-                    child: new Text("Counting Numbers"),
+                    child: new Text(
+                      "Counting Numbers",
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'countingNum');
                     }),
                 new ElevatedButton(
-                    child: new Text("Pattern Recognition"),
+                    child: new Text(
+                      "Pattern Recognition",
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'patternRecognition');
                     })
