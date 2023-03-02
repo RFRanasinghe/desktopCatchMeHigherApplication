@@ -19,6 +19,7 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
       body: Center(
         child: Container(
+          margin: EdgeInsets.all(20.0),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -27,32 +28,45 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              new ElevatedButton(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: new Text(
-                    "Create Profile",
-                    style: TextStyle(
-                      fontSize: 30,
+              Padding(
+                padding: const EdgeInsets.all(160.0),
+                child: SizedBox(
+                  width: 400,
+                  child: new ElevatedButton(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: new Text(
+                        "Create Profile",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                      ),
                     ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'newprofile');
+                    },
                   ),
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, 'newprofile');
-                },
               ),
-              new ElevatedButton(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: new Text(
-                      "Existing Profile",
-                      style: TextStyle(fontSize: 30),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, 'existingprofile');
-                  })
+              Padding(
+                padding: const EdgeInsets.all(160.0),
+                child: SizedBox(
+                  width: 400,
+                  child: new ElevatedButton(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: new Text(
+                          "Existing Profile",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'existingprofile');
+                      }),
+                ),
+              )
             ],
           ),
         ),

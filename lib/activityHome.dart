@@ -27,12 +27,16 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
               ),
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 new ElevatedButton(
-                  child: new Text(
-                    "Color Selection",
-                    style: TextStyle(
-                      fontSize: 30,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: new Text(
+                      "Color Selection",
+                      style: TextStyle(
+                        fontSize: 30,
+                      ),
                     ),
                   ),
                   onPressed: () {
@@ -40,30 +44,39 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                   },
                 ),
                 new ElevatedButton(
-                    child: new Text(
-                      "Color Filling",
-                      style: TextStyle(
-                        fontSize: 30,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: new Text(
+                        "Color Filling",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
                       ),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'colorFilling');
                     }),
                 new ElevatedButton(
-                    child: new Text(
-                      "Counting Numbers",
-                      style: TextStyle(
-                        fontSize: 30,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: new Text(
+                        "Counting Numbers",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
                       ),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, 'countingNum');
                     }),
                 new ElevatedButton(
-                    child: new Text(
-                      "Pattern Recognition",
-                      style: TextStyle(
-                        fontSize: 30,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: new Text(
+                        "Pattern Recognition",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
                       ),
                     ),
                     onPressed: () {
