@@ -27,31 +27,34 @@ class _NewProfileState extends State<NewProfile> {
             fit: BoxFit.cover,
           ),
         ),
-        child: ListView(children: [
-          Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TextFormField(
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.email),
-                    hintText: 'Enter your email address',
-                    labelText: 'Email address',
-                    fillColor: Colors.white,
-                    filled: true,
+        child: Padding(
+          padding: const EdgeInsets.all(80.0),
+          child: ListView(children: [
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      icon: const Icon(Icons.email),
+                      hintText: 'Enter your email address',
+                      labelText: 'Email address',
+                      fillColor: Colors.white,
+                      filled: true,
+                    ),
                   ),
-                ),
-                new Container(
-                  child: new ElevatedButton(
-                    child: const Text('Submit'),
-                    onPressed: null,
+                  new Container(
+                    child: new ElevatedButton(
+                      child: const Text('Submit'),
+                      onPressed: null,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }
