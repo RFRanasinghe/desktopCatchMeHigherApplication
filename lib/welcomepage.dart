@@ -47,6 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     onPressed: () {
                       Navigator.pushNamed(context, 'newprofile');
                     },
+                    
                   ),
                 ),
               ),
