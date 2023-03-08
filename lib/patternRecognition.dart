@@ -21,14 +21,30 @@ class _PatternRecognitionState extends State<PatternRecognition> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('images/galaxy.png'),
+              image: AssetImage('images/actBg.jpg'),
               fit: BoxFit.cover,
             ),
           ),
-          child: Container(
-            width: 1300,
-            height: 600,
-            color: Colors.white,
+          child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            child: InkWell(
+              onTap: () => print("ciao"),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    width: 900,
+                    height: 600,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15.0),
+                        topRight: Radius.circular(15.0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

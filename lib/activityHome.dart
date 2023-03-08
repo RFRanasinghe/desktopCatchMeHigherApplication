@@ -45,6 +45,11 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                       onPressed: () {
                         Navigator.pushNamed(context, 'colorSelection');
                       },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -53,18 +58,24 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                   child: SizedBox(
                     width: 400,
                     child: new ElevatedButton(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: new Text(
-                            "Color Filling",
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: new Text(
+                          "Color Filling",
+                          style: TextStyle(
+                            fontSize: 30,
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'colorFilling');
-                        }),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'colorFilling');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
@@ -72,18 +83,24 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                   child: SizedBox(
                     width: 400,
                     child: new ElevatedButton(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: new Text(
-                            "Counting Numbers",
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: new Text(
+                          "Counting Numbers",
+                          style: TextStyle(
+                            fontSize: 30,
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'countingNum');
-                        }),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'countingNum');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
@@ -91,18 +108,24 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                   child: SizedBox(
                     width: 400,
                     child: new ElevatedButton(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: new Text(
-                            "Pattern Recognition",
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: new Text(
+                          "Pattern Recognition",
+                          style: TextStyle(
+                            fontSize: 30,
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, 'patternRecognition');
-                        }),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'patternRecognition');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                    ),
                   ),
                 )
               ],

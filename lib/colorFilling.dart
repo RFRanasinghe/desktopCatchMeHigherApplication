@@ -22,7 +22,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('images/galaxy.png'),
+              image: AssetImage('images/actBg.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -42,12 +42,60 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                         topRight: Radius.circular(15.0),
                       ),
                       child: Image.asset(
-                        'images/blackCar.png',
+                        'images/dog.png',
                         width: 300,
                         height: 150,
                         //fit: BoxFit.fill,
                       ),
                     ),
+                  ),
+                  ListTile(
+                    title: Text("Drag and drop appropriate Colours"),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        child: Text("Blue"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        child: Text("Green"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        child: Text("Black"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellow,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        child: Text("Yellow"),
+                      ),
+                    ],
                   ),
                 ],
               ),
