@@ -35,7 +35,7 @@ class _NewProfileState extends State<NewProfile> {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.all(40.0),
+            padding: EdgeInsets.all(10.0),
             child: Form(
               key: _formKey,
               child: Column(
