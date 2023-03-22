@@ -67,9 +67,12 @@ flutter:
      - images/dog.png
      - images/actBg.jpg
      - images/count.jpg
-     - images/blackCar.png
      - images/car.jpeg
      - images/screen.jpeg
+     - images/left.jpg
+     - images/right.jpg
+     - images/pencil.png
+     - images/seaLion.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

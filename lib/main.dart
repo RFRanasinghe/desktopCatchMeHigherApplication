@@ -5,6 +5,8 @@ import 'package:desktopcatchmehigher/colorFilling.dart';
 import 'package:desktopcatchmehigher/colorSelection.dart';
 import 'package:desktopcatchmehigher/countingNum.dart';
 import 'package:desktopcatchmehigher/patternRecognition.dart';
+import 'package:desktopcatchmehigher/selectionThree.dart';
+import 'package:desktopcatchmehigher/selectionTwo.dart';
 import 'package:desktopcatchmehigher/welcomepage.dart';
 import 'package:desktopcatchmehigher/existingprofile.dart';
 import 'package:desktopcatchmehigher/newprofile.dart';
@@ -19,11 +21,13 @@ void main() {
       'welcomepage': (context) => WelcomePage(),
       'newprofile': (context) => NewProfile(),
       'existingprofile': (context) => ExistingProfile(),
-      'activityHome':(context) => ActivityHomePage(),
-      'colorSelection':(context) => ColorSelection(),
-      'colorFilling':(context) => ColorFillingPage(),
-      'countingNum':(context) => CountingNumbers(),
-      'patternRecognition':(context) => PatternRecognition()
+      'activityHome': (context) => ActivityHomePage(),
+      'colorSelection': (context) => ColorSelection(),
+      'selectionTwo': (context) => SelectionActivityTwoPage(),
+      'selectionThree': (context) => SelectionActivityThreePage(),
+      'colorFilling': (context) => ColorFillingPage(),
+      'countingNum': (context) => CountingNumbers(),
+      'patternRecognition': (context) => PatternRecognition()
     },
   ));
 }
