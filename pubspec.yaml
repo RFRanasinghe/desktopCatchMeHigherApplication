@@ -72,7 +72,7 @@ flutter:
      - images/left.jpg
      - images/right.jpg
      - images/pencil.png
-     - images/seaLion.jpg
+     - images/sea.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
