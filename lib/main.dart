@@ -3,6 +3,7 @@ import 'dart:js';
 import 'package:desktopcatchmehigher/activityHome.dart';
 import 'package:desktopcatchmehigher/colorFilling.dart';
 import 'package:desktopcatchmehigher/colorSelection.dart';
+import 'package:desktopcatchmehigher/countFour.dart';
 import 'package:desktopcatchmehigher/countThree.dart';
 import 'package:desktopcatchmehigher/countTwo.dart';
 import 'package:desktopcatchmehigher/countingNum.dart';
@@ -31,6 +32,7 @@ void main() {
       'countingNum': (context) => CountingNumbers(),
       'countTwo': (context) => CountTwoActivity(),
       'countThree': (context) => CountThreeActivity(),
+      'countFour': (context) => CountFourActivity(),
       'patternRecognition': (context) => PatternRecognition()
     },
   ));

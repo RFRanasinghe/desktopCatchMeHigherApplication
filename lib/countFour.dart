@@ -1,16 +1,14 @@
-import 'package:desktopcatchmehigher/countFour.dart';
-import 'package:desktopcatchmehigher/countTwo.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:desktopcatchmehigher/countThree.dart';
 import 'package:flutter/material.dart';
 
-class CountThreeActivity extends StatefulWidget {
-  const CountThreeActivity({Key? key}) : super(key: key);
+class CountFourActivity extends StatefulWidget {
+  const CountFourActivity({Key? key}) : super(key: key);
 
   @override
-  _CountThreeActivityState createState() => _CountThreeActivityState();
+  _CountFourActivityState createState() => _CountFourActivityState();
 }
 
-class _CountThreeActivityState extends State<CountThreeActivity> {
+class _CountFourActivityState extends State<CountFourActivity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +37,7 @@ class _CountThreeActivityState extends State<CountThreeActivity> {
               top: 80,
               left: 600,
               child: Image.asset(
-                'images/donut.jpg',
+                'images/icecream.jpg',
                 height: 400,
                 width: 400,
               ),
@@ -52,14 +50,14 @@ class _CountThreeActivityState extends State<CountThreeActivity> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 43, 85, 44),
+                      backgroundColor: Color.fromARGB(255, 239, 26, 97),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "7",
+                        "20",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -69,14 +67,14 @@ class _CountThreeActivityState extends State<CountThreeActivity> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 15, 1, 79),
+                      backgroundColor: Color.fromARGB(255, 204, 200, 200),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "5",
+                        "14",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -86,14 +84,14 @@ class _CountThreeActivityState extends State<CountThreeActivity> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 102, 92, 7),
+                      backgroundColor: Color.fromARGB(255, 122, 181, 230),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "6",
+                        "14",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -103,14 +101,14 @@ class _CountThreeActivityState extends State<CountThreeActivity> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 200, 107, 107),
+                      backgroundColor: Color.fromARGB(255, 2, 39, 69),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "4",
+                        "18",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -126,29 +124,12 @@ class _CountThreeActivityState extends State<CountThreeActivity> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CountTwoActivity()),
+                    MaterialPageRoute(
+                        builder: (context) => CountThreeActivity()),
                   );
                 },
                 child: Image.asset(
                   'images/left.jpg',
-                  width: 100.0,
-                  height: 100.0,
-                ),
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 300.0, left: 1350.0, right: 30.0),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CountFourActivity()),
-                  );
-                },
-                child: Image.asset(
-                  'images/right.jpg',
                   width: 100.0,
                   height: 100.0,
                 ),
