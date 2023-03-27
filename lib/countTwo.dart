@@ -1,3 +1,4 @@
+import 'package:desktopcatchmehigher/countingNum.dart';
 import 'package:flutter/material.dart';
 
 class CountTwoActivity extends StatefulWidget {
@@ -115,6 +116,34 @@ class _CountTwoActivityState extends State<CountTwoActivity> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 300.0, left: 80.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CountingNumbers()),
+                  );
+                },
+                child: Image.asset(
+                  'images/left.jpg',
+                  width: 100.0,
+                  height: 100.0,
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 300.0, left: 1350.0, right: 30.0),
+              child: InkWell(
+                onTap: () {},
+                child: Image.asset(
+                  'images/right.jpg',
+                  width: 100.0,
+                  height: 100.0,
+                ),
               ),
             ),
           ],
