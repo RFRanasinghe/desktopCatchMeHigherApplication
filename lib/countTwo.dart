@@ -1,20 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ColorFillingPage extends StatefulWidget {
-  const ColorFillingPage({Key? key}) : super(key: key);
+class CountTwoActivity extends StatefulWidget {
+  const CountTwoActivity({Key? key}) : super(key: key);
 
   @override
-  _ColorFillingPageState createState() => _ColorFillingPageState();
+  _CountTwoActivityState createState() => _CountTwoActivityState();
 }
 
-class _ColorFillingPageState extends State<ColorFillingPage> {
+class _CountTwoActivityState extends State<CountTwoActivity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text("Color Filling Activity"),
+          child: Text("Counting Numbers Activity"),
         ),
       ),
       body: Container(
@@ -34,30 +33,30 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                   top: 50.0, left: 80.0, bottom: 70, right: 80.0),
             ),
             Positioned(
-              top: 100,
-              left: 200,
+              top: -30,
+              left: 500,
               child: Image.asset(
-                'images/dog.png',
-                height: 400,
-                width: 400,
+                'images/bear.png',
+                height: 600,
+                width: 600,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 530.0),
+              padding: const EdgeInsets.only(top: 510.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Color.fromARGB(255, 1, 62, 111),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "Green",
+                        "3",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -67,15 +66,14 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Color.fromARGB(255, 139, 91, 20),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
+                          borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "Blue",
+                        "8",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -85,15 +83,14 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.yellow,
+                      backgroundColor: Color.fromARGB(255, 24, 207, 152),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
+                          borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "Yellow",
+                        "6",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -103,15 +100,14 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color.fromARGB(255, 135, 66, 112),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
+                          borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "Red",
+                        "5",
                         style: TextStyle(
                           fontSize: 30,
                         ),

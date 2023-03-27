@@ -73,6 +73,8 @@ flutter:
      - images/right.jpg
      - images/pencil.png
      - images/sea.jpeg
+     - images/stick.png
+     - images/bear.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

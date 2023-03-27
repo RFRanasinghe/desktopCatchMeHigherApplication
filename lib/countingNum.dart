@@ -1,3 +1,5 @@
+import 'package:desktopcatchmehigher/activityHome.dart';
+import 'package:desktopcatchmehigher/countTwo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,36 +19,141 @@ class _CountingNumbersState extends State<CountingNumbers> {
           child: Text("Counting Numbers Activity"),
         ),
       ),
-      body: Center(
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('images/actBg.jpg'),
-              fit: BoxFit.cover,
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/screen.jpeg'),
+            fit: BoxFit.cover,
           ),
-          child: Card(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0))),
-            child: InkWell(
-              onTap: () => print("ciao"),
-              child: Column(
+        ),
+        child: Stack(
+          children: [
+            Container(
+              color: Colors.white,
+              width: double.infinity,
+              height: double.infinity,
+              margin: EdgeInsets.only(
+                  top: 50.0, left: 80.0, bottom: 70, right: 80.0),
+            ),
+            Positioned(
+              top: -30,
+              left: 500,
+              child: Image.asset(
+                'images/stick.png',
+                height: 600,
+                width: 600,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 510.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  SizedBox(
-                    width: 900,
-                    height: 600,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15.0),
-                        topRight: Radius.circular(15.0),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pink,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        "3",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        "2",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        "5",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 18, 99, 51),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        "6",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(top: 300.0, left: 80.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ActivityHomePage()),
+                  );
+                },
+                child: Image.asset(
+                  'images/left.jpg',
+                  width: 100.0,
+                  height: 100.0,
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 300.0, left: 1350.0, right: 30.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CountTwoActivity()),
+                  );
+                },
+                child: Image.asset(
+                  'images/right.jpg',
+                  width: 100.0,
+                  height: 100.0,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

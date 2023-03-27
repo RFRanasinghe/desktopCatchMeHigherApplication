@@ -103,6 +103,26 @@ class _NewProfileState extends State<NewProfile> {
                       onSaved: (value) {},
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Draggable(
+                      child: Container(
+                        color: Colors.grey,
+                        width: 200.0,
+                        height: 200.0,
+                      ),
+                      feedback: Container(
+                        color: Colors.amber,
+                        width: 200.0,
+                        height: 200.0,
+                      ),
+                      childWhenDragging: Container(
+                        color: Colors.green,
+                        width: 200.0,
+                        height: 200.0,
+                      ),
+                    ),
+                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
