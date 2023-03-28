@@ -8,6 +8,7 @@ import 'package:desktopcatchmehigher/countThree.dart';
 import 'package:desktopcatchmehigher/countTwo.dart';
 import 'package:desktopcatchmehigher/countingNum.dart';
 import 'package:desktopcatchmehigher/patternRecognition.dart';
+import 'package:desktopcatchmehigher/patternTwo.dart';
 import 'package:desktopcatchmehigher/selectionThree.dart';
 import 'package:desktopcatchmehigher/selectionTwo.dart';
 import 'package:desktopcatchmehigher/welcomepage.dart';
@@ -33,7 +34,8 @@ void main() {
       'countTwo': (context) => CountTwoActivity(),
       'countThree': (context) => CountThreeActivity(),
       'countFour': (context) => CountFourActivity(),
-      'patternRecognition': (context) => PatternRecognition()
+      'patternRecognition': (context) => PatternRecognition(),
+      'patternTwo': (context) => PatternTwoActivity(),
     },
   ));
 }
