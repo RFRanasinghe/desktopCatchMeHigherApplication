@@ -1,15 +1,14 @@
-import 'package:desktopcatchmehigher/patternRecognition.dart';
-import 'package:desktopcatchmehigher/patternThree.dart';
+import 'package:desktopcatchmehigher/patternTwo.dart';
 import 'package:flutter/material.dart';
 
-class PatternTwoActivity extends StatefulWidget {
-  const PatternTwoActivity({Key? key}) : super(key: key);
+class PatternThreeActivityPage extends StatefulWidget {
+  const PatternThreeActivityPage({Key? key}) : super(key: key);
 
   @override
-  _PatternTwoActivityState createState() => _PatternTwoActivityState();
+  _PatternThreeActivityState createState() => _PatternThreeActivityState();
 }
 
-class _PatternTwoActivityState extends State<PatternTwoActivity> {
+class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,10 +34,10 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
                   top: 50.0, left: 80.0, bottom: 70, right: 80.0),
             ),
             Positioned(
-              top: 5,
+              top: 10,
               left: 600,
               child: Image.asset(
-                'images/pq2.jpg',
+                'images/pq3.jpg',
                 height: 600,
                 width: 600,
               ),
@@ -51,7 +50,7 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 43, 128, 103),
+                      backgroundColor: Color.fromARGB(255, 67, 170, 254),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
@@ -68,7 +67,7 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 81, 11, 93),
+                      backgroundColor: Color.fromARGB(255, 223, 214, 214),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
@@ -85,7 +84,7 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 255, 153, 0),
+                      backgroundColor: Color.fromARGB(255, 255, 192, 20),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
@@ -102,7 +101,7 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 255, 212, 39),
+                      backgroundColor: Colors.red,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
@@ -126,29 +125,11 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => PatternRecognition()),
+                        builder: (context) => PatternTwoActivity()),
                   );
                 },
                 child: Image.asset(
                   'images/left.jpg',
-                  width: 100.0,
-                  height: 100.0,
-                ),
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 300.0, left: 1350.0, right: 30.0),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PatternThreeActivityPage()),
-                  );
-                },
-                child: Image.asset(
-                  'images/right.jpg',
                   width: 100.0,
                   height: 100.0,
                 ),

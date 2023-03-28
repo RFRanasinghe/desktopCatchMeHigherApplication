@@ -9,7 +9,6 @@ class ExistingProfile extends StatefulWidget {
 }
 
 class _ExistingProfileState extends State<ExistingProfile> {
-  
   final _formKey = GlobalKey<FormState>();
 
   @override
