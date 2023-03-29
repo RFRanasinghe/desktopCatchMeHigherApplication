@@ -9,6 +9,7 @@ class NewProfile extends StatefulWidget {
 }
 
 class _NewProfileState extends State<NewProfile> {
+  bool isButtonActive = true;
   final _formKey = GlobalKey<FormState>();
 
   //String _name;
@@ -21,7 +22,9 @@ class _NewProfileState extends State<NewProfile> {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text("New Profile"),
+          child: Text(
+            "New Profile",
+          ),
         ),
       ),
       body: Center(
@@ -42,10 +45,14 @@ class _NewProfileState extends State<NewProfile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
                       decoration: InputDecoration(
                         labelText: 'Id number',
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
                       ),
                       validator: (value) {
                         if (value == '') {
@@ -59,10 +66,14 @@ class _NewProfileState extends State<NewProfile> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
                       decoration: InputDecoration(
                         labelText: 'Name',
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
                       ),
                       validator: (value) {
                         if (value == '') {
@@ -74,10 +85,14 @@ class _NewProfileState extends State<NewProfile> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
                       decoration: InputDecoration(
                         labelText: 'Email Address',
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
                       ),
                       validator: (value) {
                         if (value == '') {
@@ -89,10 +104,14 @@ class _NewProfileState extends State<NewProfile> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
                       decoration: InputDecoration(
                         labelText: "Students' state of category",
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
                       ),
                       validator: (value) {
                         if (value == '') {
@@ -104,22 +123,22 @@ class _NewProfileState extends State<NewProfile> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Draggable(
                       child: Container(
                         color: Colors.grey,
-                        width: 200.0,
-                        height: 200.0,
+                        width: 100.0,
+                        height: 100.0,
                       ),
                       feedback: Container(
                         color: Colors.amber,
-                        width: 200.0,
-                        height: 200.0,
+                        width: 100.0,
+                        height: 100.0,
                       ),
                       childWhenDragging: Container(
                         color: Colors.green,
-                        width: 200.0,
-                        height: 200.0,
+                        width: 100.0,
+                        height: 100.0,
                       ),
                     ),
                   ),
@@ -127,17 +146,12 @@ class _NewProfileState extends State<NewProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(left: 150.0, top: 40.0),
+                        padding: EdgeInsets.only(left: 150.0, top: 20.0),
                         child: SizedBox(
                           width: 200,
                           height: 60,
                           child: ElevatedButton(
-                            onPressed: () {
-                              //if (_formKey.currentState.validate()) {
-                              //_formKey.currentState.save();
-                              ///// TODO: submit form data
-                              //}
-                            },
+                            onPressed: isButtonActive ? () {} : null,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.orangeAccent,
                               shape: RoundedRectangleBorder(
@@ -152,7 +166,7 @@ class _NewProfileState extends State<NewProfile> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 1000.0, top: 30.0),
+                        padding: const EdgeInsets.only(left: 1000.0, top: 10.0),
                         child: SizedBox(
                           width: 300,
                           height: 70,

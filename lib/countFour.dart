@@ -1,4 +1,5 @@
 import 'package:desktopcatchmehigher/countThree.dart';
+import 'package:desktopcatchmehigher/existingprofile.dart';
 import 'package:flutter/material.dart';
 
 class CountFourActivity extends StatefulWidget {
@@ -130,6 +131,23 @@ class _CountFourActivityState extends State<CountFourActivity> {
                 },
                 child: Image.asset(
                   'images/left.jpg',
+                  width: 100.0,
+                  height: 100.0,
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 300.0, left: 1350.0, right: 30.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ExistingProfile()),
+                  );
+                },
+                child: Image.asset(
+                  'images/right.jpg',
                   width: 100.0,
                   height: 100.0,
                 ),

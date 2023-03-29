@@ -64,6 +64,7 @@ flutter:
   assets:
      - images/papertool.jpg
      - images/bLScreen.jpg
+     - images/rainbow.jpg
      - images/dog.png
      - images/actBg.jpg
      - images/count.jpg
@@ -80,6 +81,7 @@ flutter:
      - images/pq1.jpg
      - images/pq2.jpg
      - images/pq3.jpg
+     - images/pq4.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

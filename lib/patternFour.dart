@@ -1,15 +1,15 @@
-import 'package:desktopcatchmehigher/patternFour.dart';
-import 'package:desktopcatchmehigher/patternTwo.dart';
+import 'package:desktopcatchmehigher/existingprofile.dart';
+import 'package:desktopcatchmehigher/patternThree.dart';
 import 'package:flutter/material.dart';
 
-class PatternThreeActivityPage extends StatefulWidget {
-  const PatternThreeActivityPage({Key? key}) : super(key: key);
+class PatternFourPage extends StatefulWidget {
+  const PatternFourPage({Key? key}) : super(key: key);
 
   @override
-  _PatternThreeActivityState createState() => _PatternThreeActivityState();
+  _PatternFourPageState createState() => _PatternFourPageState();
 }
 
-class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
+class _PatternFourPageState extends State<PatternFourPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +35,12 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                   top: 50.0, left: 80.0, bottom: 70, right: 80.0),
             ),
             Positioned(
-              top: 30,
+              top: 90,
               left: 600,
               child: Image.asset(
-                'images/pq3.jpg',
-                height: 600,
-                width: 600,
+                'images/pq4.jpg',
+                height: 400,
+                width: 400,
               ),
             ),
             Padding(
@@ -51,14 +51,14 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 67, 170, 254),
+                      backgroundColor: Color.fromARGB(255, 1, 34, 61),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "a",
+                        "A",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -68,14 +68,14 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 223, 214, 214),
+                      backgroundColor: Color.fromARGB(255, 183, 4, 4),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "b",
+                        "B",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -85,14 +85,14 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 255, 192, 20),
+                      backgroundColor: Color.fromARGB(255, 245, 223, 115),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "c",
+                        "C",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -102,14 +102,14 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color.fromARGB(255, 136, 193, 240),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "d",
+                        "D",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -125,8 +125,7 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => PatternTwoActivity()),
+                    MaterialPageRoute(builder: (context) => PatternThreeActivityPage()),
                   );
                 },
                 child: Image.asset(
@@ -143,7 +142,7 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PatternFourPage()),
+                    MaterialPageRoute(builder: (context) => ExistingProfile()),
                   );
                 },
                 child: Image.asset(
