@@ -1,4 +1,4 @@
-import 'dart:js';
+import 'dart:io';
 
 import 'package:desktopcatchmehigher/activityHome.dart';
 import 'package:desktopcatchmehigher/colorFilling.dart';
@@ -16,9 +16,11 @@ import 'package:desktopcatchmehigher/selectionTwo.dart';
 import 'package:desktopcatchmehigher/welcomepage.dart';
 import 'package:desktopcatchmehigher/existingprofile.dart';
 import 'package:desktopcatchmehigher/newprofile.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  initializeDefault();
   runApp(MaterialApp(
     title: "Catch Me Higher with Down Syndrome",
     debugShowCheckedModeBanner: false,
@@ -42,4 +44,10 @@ void main() {
       'patternFour': (context) => PatternFourPage(),
     },
   ));
+}
+
+initializeDefault() async {
+  FirebaseApp app = await Firebase.initializeApp();
+
+  print('Initialized default app $app');
 }

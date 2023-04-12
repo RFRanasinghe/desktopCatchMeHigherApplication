@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +13,12 @@ class _NewProfileState extends State<NewProfile> {
   bool isButtonActive = true;
   final _formKey = GlobalKey<FormState>();
 
-  //String _name;
-  //String _email;
-  //String _idNumber;
+  //DatabaseReference ref = FirebaseDatabase.instance.ref("students");
+
+  TextEditingController _nameController = new TextEditingController();
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _idNumberController = new TextEditingController();
+  TextEditingController _conditionTypeController = new TextEditingController();
   //String _stateOfCategory;
 
   @override
@@ -47,6 +51,7 @@ class _NewProfileState extends State<NewProfile> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
+                      controller: _nameController,
                       decoration: InputDecoration(
                         labelText: 'Id number',
                         labelStyle: TextStyle(
@@ -196,5 +201,14 @@ class _NewProfileState extends State<NewProfile> {
         ),
       ),
     );
+  }
+
+  addStudents() async {
+    // await ref.set({
+    //   "name": _nameController.value.text,
+    //   "email": _emailController.value.text,
+    //   "id_number": _idNumberController.value.text,
+    //   "condition_type": _conditionTypeController.value.text,
+    // });
   }
 }

@@ -11,6 +11,7 @@ class ColorSelection extends StatefulWidget {
 }
 
 class _ColorSelectionState extends State<ColorSelection> {
+  var isValid = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +36,7 @@ class _ColorSelectionState extends State<ColorSelection> {
               margin: EdgeInsets.only(
                   top: 50.0, left: 80.0, bottom: 70, right: 80.0),
             ),
+            Visibility(visible: isValid, child: Text("Error")),
             Positioned(
               top: 100,
               left: 200,
@@ -67,7 +69,16 @@ class _ColorSelectionState extends State<ColorSelection> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        isValid = true;
+                      });
+                      Future.delayed(Duration(seconds: 2)).then((value) => {
+                            setState(() {
+                              isValid = false;
+                            }),
+                          });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
