@@ -82,6 +82,7 @@ flutter:
     - images/pq2.jpg
     - images/pq3.jpg
     - images/pq4.jpg
+    - videos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

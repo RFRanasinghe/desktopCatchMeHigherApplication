@@ -11,6 +11,7 @@ class CountingNumbers extends StatefulWidget {
 }
 
 class _CountingNumbersState extends State<CountingNumbers> {
+  var correctAnswer = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +35,17 @@ class _CountingNumbersState extends State<CountingNumbers> {
               height: double.infinity,
               margin: EdgeInsets.only(
                   top: 50.0, left: 80.0, bottom: 70, right: 80.0),
+            ),
+            Visibility(
+              visible: correctAnswer,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 450.0, left: 700.0),
+                child: Image.asset(
+                  'videos/wonFree.gif',
+                  height: 200.0,
+                  width: 200.0,
+                ),
+              ),
             ),
             Positioned(
               top: -30,
@@ -84,7 +96,16 @@ class _CountingNumbersState extends State<CountingNumbers> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        correctAnswer = true;
+                      });
+                      // Future.delayed(Duration(seconds: 6)).then((value) => {
+                      //       setState(() {
+                      //         correctAnswer = false;
+                      //       }),
+                      //     });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       shape: RoundedRectangleBorder(

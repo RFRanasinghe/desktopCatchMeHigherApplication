@@ -10,6 +10,7 @@ class PatternTwoActivity extends StatefulWidget {
 }
 
 class _PatternTwoActivityState extends State<PatternTwoActivity> {
+  var correctAnswer = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +34,17 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
               height: double.infinity,
               margin: EdgeInsets.only(
                   top: 50.0, left: 80.0, bottom: 70, right: 80.0),
+            ),
+            Visibility(
+              visible: correctAnswer,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 450.0, left: 80.0),
+                child: Image.asset(
+                  'videos/wonFree.gif',
+                  height: 200.0,
+                  width: 200.0,
+                ),
+              ),
             ),
             Positioned(
               top: 5,
@@ -58,7 +70,16 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        correctAnswer = true;
+                      });
+                      // Future.delayed(Duration(seconds: 6)).then((value) => {
+                      //       setState(() {
+                      //         correctAnswer = false;
+                      //       }),
+                      //     });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 43, 128, 103),
                       shape: RoundedRectangleBorder(
