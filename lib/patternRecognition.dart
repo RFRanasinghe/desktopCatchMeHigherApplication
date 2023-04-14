@@ -44,6 +44,15 @@ class _PatternRecognitionState extends State<PatternRecognition> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.only(top: 80.0, left: 100.0),
+              child: Text(
+                "How many character are there?",
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.only(top: 510.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

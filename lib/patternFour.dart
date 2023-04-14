@@ -44,6 +44,15 @@ class _PatternFourPageState extends State<PatternFourPage> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.only(top: 80.0, left: 100.0),
+              child: Text(
+                "How many character are there?",
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.only(top: 510.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -125,7 +134,8 @@ class _PatternFourPageState extends State<PatternFourPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PatternThreeActivityPage()),
+                    MaterialPageRoute(
+                        builder: (context) => PatternThreeActivityPage()),
                   );
                 },
                 child: Image.asset(
