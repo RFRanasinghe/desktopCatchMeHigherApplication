@@ -10,6 +10,8 @@ class PatternFourPage extends StatefulWidget {
 }
 
 class _PatternFourPageState extends State<PatternFourPage> {
+  var correctAnswer = false;
+  var incorrectAnswer = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +36,24 @@ class _PatternFourPageState extends State<PatternFourPage> {
               margin: EdgeInsets.only(
                   top: 50.0, left: 80.0, bottom: 70, right: 80.0),
             ),
+            Visibility(
+              visible: correctAnswer,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 450.0, left: 400.0),
+                child: Image.asset(
+                  'videos/wonFree.gif',
+                  height: 200.0,
+                  width: 200.0,
+                ),
+              ),
+            ),
+            Visibility(
+                visible: incorrectAnswer,
+                child: Image.asset(
+                  'videos/wrong.gif',
+                  height: 200.0,
+                  width: 200.0,
+                )),
             Positioned(
               top: 90,
               left: 600,

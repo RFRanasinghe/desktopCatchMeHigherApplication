@@ -11,7 +11,8 @@ class ColorSelection extends StatefulWidget {
 }
 
 class _ColorSelectionState extends State<ColorSelection> {
-  var isValid = false;
+  var correctAnswer = false;
+  var incorrectAnswer = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,22 @@ class _ColorSelectionState extends State<ColorSelection> {
               margin: EdgeInsets.only(
                   top: 50.0, left: 80.0, bottom: 70, right: 80.0),
             ),
-            Visibility(visible: isValid, child: Text("Error")),
+            Visibility(
+              visible: correctAnswer,
+              child: Image.asset(
+                'videos/wonFree.gif',
+                height: 200.0,
+                width: 200.0,
+              ),
+            ),
+            Visibility(
+              visible: incorrectAnswer,
+              child: Image.asset(
+                'videos/wrong.gif',
+                height: 200.0,
+                width: 200.0,
+              ),
+            ),
             Positioned(
               top: 100,
               left: 200,
@@ -52,7 +68,11 @@ class _ColorSelectionState extends State<ColorSelection> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       shape: RoundedRectangleBorder(
@@ -71,11 +91,11 @@ class _ColorSelectionState extends State<ColorSelection> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        isValid = true;
+                        correctAnswer = true;
                       });
                       Future.delayed(Duration(seconds: 2)).then((value) => {
                             setState(() {
-                              isValid = false;
+                              correctAnswer = false;
                             }),
                           });
                     },
@@ -96,7 +116,11 @@ class _ColorSelectionState extends State<ColorSelection> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.yellow,
                       shape: RoundedRectangleBorder(
@@ -114,7 +138,11 @@ class _ColorSelectionState extends State<ColorSelection> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       shape: RoundedRectangleBorder(

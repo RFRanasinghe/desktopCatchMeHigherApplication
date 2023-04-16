@@ -11,6 +11,38 @@ class PatternRecognition extends StatefulWidget {
 
 class _PatternRecognitionState extends State<PatternRecognition> {
   var correctAnswer = false;
+  var incorrectAnswer = false;
+
+  
+  // var buttonA = false;
+  // var buttonB = false;
+  // var buttonC = false;
+  // var buttonD = false;
+
+  // void disableButtonA() {
+  //   setState(() {
+  //     buttonA = true;
+  //   });
+  // }
+
+  // void disableButtonB() {
+  //   setState(() {
+  //     buttonB = true;
+  //   });
+  // }
+
+  // void disableButtonC() {
+  //   setState(() {
+  //     buttonC = true;
+  //   });
+  // }
+
+  // void disableButtonD() {
+  //   setState(() {
+  //     buttonD = true;
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +78,14 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                 ),
               ),
             ),
+            Visibility(
+              visible: incorrectAnswer,
+              child: Image.asset(
+                'videos/wrong.gif',
+                height: 200.0,
+                width: 200.0,
+              ),
+            ),
             Positioned(
               top: 10,
               left: 600,
@@ -70,7 +110,11 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 13, 58, 15),
                       shape: RoundedRectangleBorder(
@@ -80,23 +124,6 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
                         "a",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 185, 198, 186),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "b",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -115,6 +142,27 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                       //     });
                     },
                     style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 185, 198, 186),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        "b",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 234, 169, 85),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0)),
@@ -130,7 +178,11 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 31, 7, 133),
                       shape: RoundedRectangleBorder(

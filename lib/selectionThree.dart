@@ -12,6 +12,8 @@ class SelectionActivityThreePage extends StatefulWidget {
 
 class _SelectionActivityThreePageState
     extends State<SelectionActivityThreePage> {
+  var correctAnswer = false;
+  var incorrectAnswer = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +38,25 @@ class _SelectionActivityThreePageState
               margin: EdgeInsets.only(
                   top: 50.0, left: 80.0, bottom: 70.0, right: 80.0),
             ),
+            Visibility(
+              visible: correctAnswer,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 450.0, left: 400.0),
+                child: Image.asset(
+                  'videos/wonFree.gif',
+                  height: 200.0,
+                  width: 200.0,
+                ),
+              ),
+            ),
+            Visibility(
+              visible: incorrectAnswer,
+              child: Image.asset(
+                'videos/wrong.gif',
+                height: 200.0,
+                width: 200.0,
+              ),
+            ),
             Positioned(
               top: 100.0,
               left: 200.0,
@@ -51,7 +72,11 @@ class _SelectionActivityThreePageState
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       shape: RoundedRectangleBorder(
@@ -68,7 +93,11 @@ class _SelectionActivityThreePageState
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
@@ -85,7 +114,11 @@ class _SelectionActivityThreePageState
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
                       shape: RoundedRectangleBorder(
@@ -102,7 +135,16 @@ class _SelectionActivityThreePageState
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        correctAnswer = true;
+                      });
+                      // Future.delayed(Duration(seconds: 6)).then((value) => {
+                      //       setState(() {
+                      //         correctAnswer = false;
+                      //       }),
+                      //     });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey,
                       shape: RoundedRectangleBorder(

@@ -11,6 +11,7 @@ class CountTwoActivity extends StatefulWidget {
 
 class _CountTwoActivityState extends State<CountTwoActivity> {
   var correctAnswer = false;
+  var incorrectAnswer = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +47,14 @@ class _CountTwoActivityState extends State<CountTwoActivity> {
                 ),
               ),
             ),
+            Visibility(
+              visible: incorrectAnswer,
+              child: Image.asset(
+                'videos/wrong.gif',
+                height: 200.0,
+                width: 200.0,
+              ),
+            ),
             Positioned(
               top: -30,
               left: 500,
@@ -61,7 +70,11 @@ class _CountTwoActivityState extends State<CountTwoActivity> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 1, 62, 111),
                       shape: RoundedRectangleBorder(
@@ -78,7 +91,11 @@ class _CountTwoActivityState extends State<CountTwoActivity> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 139, 91, 20),
                       shape: RoundedRectangleBorder(
@@ -121,7 +138,11 @@ class _CountTwoActivityState extends State<CountTwoActivity> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        incorrectAnswer = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 135, 66, 112),
                       shape: RoundedRectangleBorder(
