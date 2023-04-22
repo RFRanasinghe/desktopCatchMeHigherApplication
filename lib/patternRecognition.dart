@@ -13,7 +13,13 @@ class _PatternRecognitionState extends State<PatternRecognition> {
   var correctAnswer = false;
   var incorrectAnswer = false;
 
-  
+  int buttonSelected = -1;
+
+  void onButtonPressed(int indexButton) {
+    setState(() {
+      buttonSelected = indexButton;
+    });
+  }
   // var buttonA = false;
   // var buttonB = false;
   // var buttonC = false;
@@ -111,6 +117,9 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                 children: <Widget>[
                   ElevatedButton(
                     onPressed: () {
+                      buttonSelected == 0 ? null : () => onButtonPressed(0);
+                      child:
+                      Text("Wrong Answer");
                       setState(() {
                         incorrectAnswer = true;
                       });

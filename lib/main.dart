@@ -26,7 +26,8 @@ void main() {
     debugShowCheckedModeBanner: false,
     initialRoute: 'welcomepage',
     routes: {
-      'welcomepage': (context) => WelcomePage(),
+      'welcomepage': (
+      context) => WelcomePage(),
       'newprofile': (context) => NewProfile(),
       'existingprofile': (context) => ExistingProfile(),
       'activityHome': (context) => ActivityHomePage(),
@@ -47,7 +48,9 @@ void main() {
 }
 
 initializeDefault() async {
-  FirebaseApp app = await Firebase.initializeApp();
-
-  print('Initialized default app $app');
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    FirebaseApp app = await Firebase.initializeApp();
+    print('Initialized default app $app');
+  } catch (ex) {}
 }
