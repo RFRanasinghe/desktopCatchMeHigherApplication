@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:desktopcatchmehigher/activityHome.dart';
+import 'package:desktopcatchmehigher/admin.dart';
 import 'package:desktopcatchmehigher/colorFilling.dart';
 import 'package:desktopcatchmehigher/colorSelection.dart';
 import 'package:desktopcatchmehigher/countFour.dart';
@@ -26,8 +27,7 @@ void main() {
     debugShowCheckedModeBanner: false,
     initialRoute: 'welcomepage',
     routes: {
-      'welcomepage': (
-      context) => WelcomePage(),
+      'welcomepage': (context) => WelcomePage(),
       'newprofile': (context) => NewProfile(),
       'existingprofile': (context) => ExistingProfile(),
       'activityHome': (context) => ActivityHomePage(),
@@ -43,14 +43,17 @@ void main() {
       'patternTwo': (context) => PatternTwoActivity(),
       'patternThree': (context) => PatternThreeActivityPage(),
       'patternFour': (context) => PatternFourPage(),
+      'admin': (context) => AdminMonitorPage(),
     },
   ));
 }
 
-initializeDefault() async {
+initializeDefault() async {           //initializing the Firebase to the main file 
   try {
     WidgetsFlutterBinding.ensureInitialized();
     FirebaseApp app = await Firebase.initializeApp();
     print('Initialized default app $app');
-  } catch (ex) {}
+  } catch (ex) {
+    print('Re-check building the connection through Firebase');
+  }
 }

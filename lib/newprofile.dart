@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
+import 'package:image_picker_windows/image_picker_windows.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class NewProfile extends StatefulWidget {
@@ -65,7 +66,6 @@ class _NewProfileState extends State<NewProfile> {
       return Text("No Preview");
     }
   }
-  //String _stateOfCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -282,14 +282,33 @@ class _NewProfileState extends State<NewProfile> {
   // });
   //}
 
-  void submitForm() {
+  Future<void> submitForm() async {
     final txtName = _nameController.value.text;
     final txtemail = _emailController.value.text;
     final txtid_number = _idNumberController.value.text;
     final txtcondition_type = _conditionTypeController.value.text;
 
     //convert XFIle to file
+    Future<void> main() async {
+      final imagePicker =
+          ImagePickerWindows(); //select image using image picker package
+      final PickedFile? XFile =
+          await imagePicker.pickImage(source: ImageSource.gallery);
+
+      if (XFile != null) {
+        //convert XFile to file using the File constructor
+        final file = File(XFile.path);
+      }
+    }
+
     // upload file to firebase storage
+    //create reference to the firebase storage bucket
+    final FirebaseStorage storage = FirebaseStorage.instance;
+    final Reference storageReference = storage.ref().child('');
+
+    //upload file
+    final File file = File('path/to/your/file');
+    final TaskSnapshot taskSnapshot = await storageReference.putFile(file);
 
     final imageURL = ''; //get download url
 
@@ -307,9 +326,11 @@ class _NewProfileState extends State<NewProfile> {
         })
         .then((value) => {
               //data successfully submitted
+              print('Data stored successfully')
             })
         .catchError((error) {
           //handle error
+          print('Data did not get saved successfully');
         });
   }
 }
