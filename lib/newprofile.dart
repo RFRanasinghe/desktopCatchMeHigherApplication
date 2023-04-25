@@ -219,7 +219,7 @@ class _NewProfileState extends State<NewProfile> {
                         child: SizedBox(
                           width: 200,
                           height: 50,
-                          child: ElevatedButton(
+                          child: ElevatedButton.icon(
                             onPressed: isButtonActive
                                 ? () {
                                     if (_formKey.currentState!.validate()) {
@@ -233,10 +233,11 @@ class _NewProfileState extends State<NewProfile> {
                                 borderRadius: BorderRadius.circular(15.0),
                               ),
                             ),
-                            child: Text(
+                            label: Text(
                               "Submit",
                               style: TextStyle(fontSize: 30),
                             ),
+                            icon: Icon(Icons.send_sharp),
                           ),
                         ),
                       ),
@@ -245,7 +246,7 @@ class _NewProfileState extends State<NewProfile> {
                         child: SizedBox(
                           width: 300,
                           height: 60,
-                          child: ElevatedButton(
+                          child: ElevatedButton.icon(
                             onPressed: () {
                               Navigator.pushNamed(context, 'activityHome');
                             },
@@ -255,10 +256,11 @@ class _NewProfileState extends State<NewProfile> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            child: Text(
+                            label: Text(
                               "Activity Home",
                               style: TextStyle(fontSize: 30),
                             ),
+                            icon: Icon(Icons.keyboard_option_key_sharp),
                           ),
                         ),
                       ),

@@ -75,9 +75,10 @@ class _WelcomePageState extends State<WelcomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  ElevatedButton(
+                  ElevatedButton.icon(
+                    icon: Icon(Icons.local_activity_sharp),
                     onPressed: () {},
-                    child: Text(
+                    label: Text(
                       "Admin",
                       style: TextStyle(
                         fontSize: 30,

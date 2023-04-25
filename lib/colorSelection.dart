@@ -2,6 +2,8 @@ import 'package:desktopcatchmehigher/activityHome.dart';
 import 'package:desktopcatchmehigher/selectionTwo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/services.dart';
 
 class ColorSelection extends StatefulWidget {
   const ColorSelection({Key? key}) : super(key: key);
@@ -13,6 +15,7 @@ class ColorSelection extends StatefulWidget {
 class _ColorSelectionState extends State<ColorSelection> {
   var correctAnswer = false;
   var incorrectAnswer = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +63,77 @@ class _ColorSelectionState extends State<ColorSelection> {
                 'images/car.jpeg',
                 height: 400,
                 width: 400,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 80.0, left: 100.0),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Text(
+                        "What is the color of this car?",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.select_all_sharp),
+                        onPressed: () async {
+                          // AudioPlayer p = new AudioPlayer();
+                          // await p.play(AssetSource('audio/test.mp3'));
+                        },
+                        label: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "Click Me",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 160, 97, 2),
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.try_sms_star_sharp),
+                        onPressed: () {},
+                        label: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "Try Again",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 1, 37, 66),
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.stop_sharp),
+                        onPressed: () {},
+                        label: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "FINISH",
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 2, 66, 27),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             Padding(
