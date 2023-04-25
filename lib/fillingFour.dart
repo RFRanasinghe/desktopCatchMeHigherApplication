@@ -1,22 +1,39 @@
 import 'package:desktopcatchmehigher/activityHome.dart';
 import 'package:desktopcatchmehigher/fillingTwo.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:desktopcatchmehigher/widget/fillingThree.dart';
 import 'package:flutter/material.dart';
 
-class ColorFillingPage extends StatefulWidget {
-  const ColorFillingPage({Key? key}) : super(key: key);
+class ColorFillingFourthPage extends StatefulWidget {
+  const ColorFillingFourthPage({Key? key}) : super(key: key);
 
   @override
-  _ColorFillingPageState createState() => _ColorFillingPageState();
+  _ColorFillingFourthPageState createState() => _ColorFillingFourthPageState();
 }
 
-class _ColorFillingPageState extends State<ColorFillingPage> {
+class _ColorFillingFourthPageState extends State<ColorFillingFourthPage> {
+  // List<ItemModel> items;
+  // List<ItemModel> items2;
+
+  // int score;
+  // bool gameOver;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   initGame();
+  // }
+
+  // initGame() {
+  //   gameOver = false;
+  //   score = 0;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text("Color Filling Activity"),
+          child: Text("Color Filling Activity - Page 4"),
         ),
       ),
       body: Container(
@@ -39,7 +56,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
               top: 100,
               left: 200,
               child: Image.asset(
-                'images/dog.png',
+                'images/pig.png',
                 height: 400,
                 width: 400,
               ),
@@ -52,7 +69,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        "Select the color of this dog?",
+                        "Select the color of this dear?",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -113,83 +130,23 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 530.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Green",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Blue",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.yellow,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Yellow",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Red",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              padding: const EdgeInsets.all(60),
+              // child: Column(
+              //   children: <Widget>[
+              //     Text.rich(TextSpan(
+              //       children: [
+              //         TextSpan(text: "Score: "),
+              //         TextSpan(
+              //             text: "$score",
+              //             style: TextStyle(
+              //               color: Colors.green,
+              //               fontWeight: FontWeight.bold,
+              //               fontSize: 30,
+              //             )),
+              //       ],
+              //     ))
+              //   ],
+              // ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 300.0, left: 80.0),
@@ -197,7 +154,8 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ActivityHomePage()),
+                    MaterialPageRoute(
+                        builder: (context) => ColorFillingThirdPage()),
                   );
                 },
                 child: Image.asset(
@@ -214,8 +172,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => ColorFillingSecondPage()),
+                    MaterialPageRoute(builder: (context) => ActivityHomePage()),
                   );
                 },
                 child: Image.asset(

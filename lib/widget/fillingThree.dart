@@ -1,22 +1,21 @@
-import 'package:desktopcatchmehigher/activityHome.dart';
+import 'package:desktopcatchmehigher/fillingFour.dart';
 import 'package:desktopcatchmehigher/fillingTwo.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ColorFillingPage extends StatefulWidget {
-  const ColorFillingPage({Key? key}) : super(key: key);
+class ColorFillingThirdPage extends StatefulWidget {
+  const ColorFillingThirdPage({Key? key}) : super(key: key);
 
   @override
-  _ColorFillingPageState createState() => _ColorFillingPageState();
+  _ColorFillingThirdPageState createState() => _ColorFillingThirdPageState();
 }
 
-class _ColorFillingPageState extends State<ColorFillingPage> {
+class _ColorFillingThirdPageState extends State<ColorFillingThirdPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text("Color Filling Activity"),
+          child: Text("Color Filling Activity - Page 3"),
         ),
       ),
       body: Container(
@@ -39,7 +38,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
               top: 100,
               left: 200,
               child: Image.asset(
-                'images/dog.png',
+                'images/dear.png',
                 height: 400,
                 width: 400,
               ),
@@ -52,7 +51,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        "Select the color of this dog?",
+                        "Select the color of this dear?",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -113,91 +112,13 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 530.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Green",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Blue",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.yellow,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Yellow",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Red",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
               padding: const EdgeInsets.only(top: 300.0, left: 80.0),
               child: InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ActivityHomePage()),
+                    MaterialPageRoute(
+                        builder: (context) => ColorFillingSecondPage()),
                   );
                 },
                 child: Image.asset(
@@ -215,7 +136,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ColorFillingSecondPage()),
+                        builder: (context) => ColorFillingFourthPage()),
                   );
                 },
                 child: Image.asset(

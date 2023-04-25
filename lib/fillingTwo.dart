@@ -1,22 +1,58 @@
-import 'package:desktopcatchmehigher/activityHome.dart';
-import 'package:desktopcatchmehigher/fillingTwo.dart';
+import 'package:desktopcatchmehigher/colorFilling.dart';
+import 'package:desktopcatchmehigher/widget/fillingThree.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ColorFillingPage extends StatefulWidget {
-  const ColorFillingPage({Key? key}) : super(key: key);
+class ColorFillingSecondPage extends StatefulWidget {
+  const ColorFillingSecondPage({Key? key}) : super(key: key);
 
   @override
-  _ColorFillingPageState createState() => _ColorFillingPageState();
+  _ColorFillingSecondPageState createState() => _ColorFillingSecondPageState();
 }
 
-class _ColorFillingPageState extends State<ColorFillingPage> {
+class _ColorFillingSecondPageState extends State<ColorFillingSecondPage> {
+  List<Color> stack1 = [Colors.red, Colors.blue];
+  List<Color> stack2 = [Colors.green];
+
+  Widget buildStack(List<Color> stack) => DragTarget<Color>(
+      onAccept: (data) {
+        setState(() {
+          stack.add(data);
+        });
+      },
+      builder: (context, _, __) => Stack(
+            children: [
+              Container(
+                color: Colors.black,
+                width: 100,
+                height: 100,
+                child: const Center(child: Text('Empty')),
+              ),
+              ...stack.map(buildStackItem).toList(),
+            ],
+          ));
+
+  Widget buildStackItem(Color color) {
+    final coloredBox = Container(
+      color: color,
+      width: 100,
+      height: 100,
+    );
+
+    return Draggable<Color>(
+      data: color,
+      child: coloredBox,
+      feedback: coloredBox,
+      childWhenDragging: const SizedBox(width: 100, height: 100),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: Text("Color Filling Activity"),
+          child: Text("Color Filling Activity - Page 2"),
         ),
       ),
       body: Container(
@@ -39,7 +75,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
               top: 100,
               left: 200,
               child: Image.asset(
-                'images/dog.png',
+                'images/fish.jpg',
                 height: 400,
                 width: 400,
               ),
@@ -52,7 +88,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        "Select the color of this dog?",
+                        "Select the color of this fish?",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -114,80 +150,11 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 530.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Green",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Blue",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.yellow,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Yellow",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Red",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  buildStack(stack1),
+                  buildStack(stack2),
                 ],
               ),
             ),
@@ -197,7 +164,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ActivityHomePage()),
+                    MaterialPageRoute(builder: (context) => ColorFillingPage()),
                   );
                 },
                 child: Image.asset(
@@ -215,7 +182,7 @@ class _ColorFillingPageState extends State<ColorFillingPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ColorFillingSecondPage()),
+                        builder: (context) => ColorFillingThirdPage()),
                   );
                 },
                 child: Image.asset(
