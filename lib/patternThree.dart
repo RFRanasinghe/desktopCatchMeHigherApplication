@@ -65,11 +65,70 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 80.0, left: 100.0),
-              child: Text(
-                "How many character are there?",
-                style: TextStyle(
-                  fontSize: 30,
-                ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Text(
+                        "Select the next correct pattern?",
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: Icon(Icons.select_all_sharp),
+                        label: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "Click Me",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 160, 97, 2),
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        icon: Icon(Icons.try_sms_star_sharp),
+                        onPressed: () {},
+                        label: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "Try Again",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 1, 37, 66),
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: Icon(Icons.stop_sharp),
+                        label: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "FINISH",
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 2, 66, 27),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             Padding(
