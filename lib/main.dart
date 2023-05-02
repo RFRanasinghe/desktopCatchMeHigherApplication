@@ -18,11 +18,14 @@ import 'package:desktopcatchmehigher/selectionTwo.dart';
 import 'package:desktopcatchmehigher/welcomepage.dart';
 import 'package:desktopcatchmehigher/existingprofile.dart';
 import 'package:desktopcatchmehigher/newprofile.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  initializeDefault();
+void main() async {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
+  ///initializeDefault();
   runApp(MaterialApp(
     title: "Catch Me Higher with Down Syndrome",
     debugShowCheckedModeBanner: false,
@@ -50,12 +53,25 @@ void main() {
   ));
 }
 
-initializeDefault() async {           //initializing the Firebase to the main file 
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
-    FirebaseApp app = await Firebase.initializeApp();
-    print('Initialized default app $app');
-  } catch (ex) {
-    print('Re-check building the connection through Firebase');
-  }
-}
+// initializeDefault() async {
+//   //initializing the Firebase to the main file
+//   try {
+//     WidgetsFlutterBinding.ensureInitialized();
+
+//     // FirebaseApp app = await Firebase.initializeApp(
+//     //     name: "WebPatchMeHigher",
+//     //     options: const FirebaseOptions(
+//     //         apiKey: "AIzaSyCLjMDb_FdCOyTqaEgoUhR3tv2EsHU-GcY",
+//     //         authDomain: "desktopappdatabase.firebaseapp.com",
+//     //         databaseURL:
+//     //             "https://desktopappdatabase-default-rtdb.firebaseio.com",
+//     //         projectId: "desktopappdatabase",
+//     //         storageBucket: "desktopappdatabase.appspot.com",
+//     //         messagingSenderId: "861575985303",
+//     //         appId: "1:861575985303:web:69bf4c3418f59fd171d1d2",
+//     //         measurementId: "G-J3XDQ1R8WL"));
+//     // print('Initialized default app $app');
+//   } catch (ex) {
+//     print('Re-check building the connection through Firebase');
+//   }
+// }

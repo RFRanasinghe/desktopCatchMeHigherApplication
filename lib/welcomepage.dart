@@ -57,7 +57,9 @@ class _WelcomePageState extends State<WelcomePage> {
                     child: SizedBox(
                       width: 400,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'existingprofile');
+                        },
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Text(
@@ -77,7 +79,9 @@ class _WelcomePageState extends State<WelcomePage> {
                 children: <Widget>[
                   ElevatedButton.icon(
                     icon: Icon(Icons.local_activity_sharp),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'AdminMonitorPage');
+                    },
                     label: Text(
                       "Admin",
                       style: TextStyle(

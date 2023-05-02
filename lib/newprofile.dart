@@ -21,6 +21,9 @@ class NewProfile extends StatefulWidget {
 }
 
 class _NewProfileState extends State<NewProfile> {
+  //final databaseReference = FirebaseDatabase.instance.reference();
+
+
   bool isButtonActive = true;
   late DropzoneViewController controller;
   final Set<XFile> files = {};
@@ -99,7 +102,7 @@ class _NewProfileState extends State<NewProfile> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
-                      controller: _nameController,
+                      controller: _idNumberController,
                       decoration: InputDecoration(
                         labelText: 'Id number',
                         labelStyle: TextStyle(
@@ -121,6 +124,7 @@ class _NewProfileState extends State<NewProfile> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
+                      controller: _nameController,
                       decoration: InputDecoration(
                         labelText: 'Name',
                         labelStyle: TextStyle(
@@ -140,6 +144,7 @@ class _NewProfileState extends State<NewProfile> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         labelText: 'Email Address',
                         labelStyle: TextStyle(
@@ -159,6 +164,7 @@ class _NewProfileState extends State<NewProfile> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
+                      controller: _conditionTypeController,
                       decoration: InputDecoration(
                         labelText: "Students' state of category",
                         labelStyle: TextStyle(
@@ -291,48 +297,51 @@ class _NewProfileState extends State<NewProfile> {
     final txtcondition_type = _conditionTypeController.value.text;
 
     //convert XFIle to file
-    Future<void> main() async {
-      final imagePicker =
-          ImagePickerWindows(); //select image using image picker package
-      final PickedFile? XFile =
-          await imagePicker.pickImage(source: ImageSource.gallery);
 
-      if (XFile != null) {
-        //convert XFile to file using the File constructor
-        final file = File(XFile.path);
-      }
-    }
+    uploadFile(
+      txtName,
+      txtemail,
+      txtid_number,
+      txtcondition_type,
+    );
+  }
 
+  uploadFile(txtName, txtEmail, txtid_number, txtcondition_type) async {
     // upload file to firebase storage
     //create reference to the firebase storage bucket
     final FirebaseStorage storage = FirebaseStorage.instance;
-    final Reference storageReference = storage.ref().child('');
+    final Reference storageReference =
+        storage.ref().child('profile_pictures_of_dss');
 
-    //upload file
-    final File file = File('path/to/your/file');
-    final TaskSnapshot taskSnapshot = await storageReference.putFile(file);
+    if (files.isNotEmpty) {
+      final imageXFile = files.last;
+      //upload file
+      final file = File(imageXFile.path);
+      final TaskSnapshot taskSnapshot = await storageReference.putFile(file);
 
-    final imageURL = ''; //get download url
+      final imageURL =
+          await taskSnapshot.ref.getDownloadURL(); //get download url
 
-    DatabaseReference reference =
-        FirebaseDatabase.instance.reference().child('Students');
+      DatabaseReference reference =
+          FirebaseDatabase.instance.reference().child('Students');
 
-    reference
-        .push()
-        .set({
-          'name': txtName,
-          'email': txtemail,
-          'id_number': txtid_number,
-          'condition_type': txtcondition_type,
-          'imageURL': imageURL
-        })
-        .then((value) => {
-              //data successfully submitted
-              print('Data stored successfully')
-            })
-        .catchError((error) {
-          //handle error
-          print('Data did not get saved successfully');
-        });
+      reference
+          .push()
+          .set({
+            'name': txtName,
+            'email': txtEmail,
+            'id_number': txtid_number,
+            'condition_type': txtcondition_type,
+            'imageURL': imageURL
+          })
+          .then((value) => {
+                //data successfully submitted
+                print('Data stored successfully')
+              })
+          .catchError((error) {
+            //handle error
+            print('Data did not get saved successfully');
+          });
+    } else {}
   }
 }
