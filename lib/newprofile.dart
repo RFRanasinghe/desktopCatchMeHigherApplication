@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:desktopcatchmehigher/widget/dropzoneWidget.dart';
@@ -13,6 +14,8 @@ import 'package:image_picker_platform_interface/image_picker_platform_interface.
 import 'package:image_picker_windows/image_picker_windows.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+//import 'dart:html';
+
 class NewProfile extends StatefulWidget {
   const NewProfile({Key? key}) : super(key: key);
 
@@ -22,53 +25,60 @@ class NewProfile extends StatefulWidget {
 
 class _NewProfileState extends State<NewProfile> {
   //final databaseReference = FirebaseDatabase.instance.reference();
-
+  final _formKey = GlobalKey<FormState>();
 
   bool isButtonActive = true;
   late DropzoneViewController controller;
   final Set<XFile> files = {};
 
-  final _formKey = GlobalKey<FormState>();
-
   //DatabaseReference ref = FirebaseDatabase.instance.ref("students");
 
-  TextEditingController _nameController = new TextEditingController();
-  TextEditingController _emailController = new TextEditingController();
-  TextEditingController _idNumberController = new TextEditingController();
-  TextEditingController _conditionTypeController = new TextEditingController();
+  TextEditingController _idNumberController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _conditionTypeController = TextEditingController();
 
-  Widget buildFile(XFile file) {
-    final isJPG = file.path.endsWith('jpg');
-    final isPNG = file.path.endsWith('png');
-    final isJPEG = file.path.endsWith('jpeg');
-
-    if (isJPG) {
-      return Image.file(
-        File(file.path),
-        width: 50,
-        height: 50,
-        fit: BoxFit.cover,
-      );
-    }
-    if (isPNG) {
-      return Image.file(
-        File(file.path),
-        width: 50,
-        height: 50,
-        fit: BoxFit.cover,
-      );
-    }
-    if (isJPEG) {
-      return Image.file(
-        File(file.path),
-        width: 50,
-        height: 50,
-        fit: BoxFit.cover,
-      );
-    } else {
-      return Text("No Preview");
-    }
+  @override
+  void dispose() {
+    _idNumberController.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _conditionTypeController.dispose();
+    super.dispose();
   }
+
+  // Widget buildFile(XFile file) {
+  //   final isJPG = file.path.endsWith('jpg');
+  //   final isPNG = file.path.endsWith('png');
+  //   final isJPEG = file.path.endsWith('jpeg');
+
+  //   if (isJPG) {
+  //     return Image.file(
+  //       File(file.path),
+  //       width: 50,
+  //       height: 50,
+  //       fit: BoxFit.cover,
+  //     );
+  //   }
+  //   if (isPNG) {
+  //     return Image.file(
+  //       File(file.path),
+  //       width: 50,
+  //       height: 50,
+  //       fit: BoxFit.cover,
+  //     );
+  //   }
+  //   if (isJPEG) {
+  //     return Image.file(
+  //       File(file.path),
+  //       width: 50,
+  //       height: 50,
+  //       fit: BoxFit.cover,
+  //     );
+  //   } else {
+  //     return Text("No Preview");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -211,7 +221,7 @@ class _NewProfileState extends State<NewProfile> {
                         SingleChildScrollView(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: files.map(buildFile).toList(),
+                            //children: files.map(buildFile).toList(),
                           ),
                         ),
                       ],
@@ -229,7 +239,7 @@ class _NewProfileState extends State<NewProfile> {
                             onPressed: isButtonActive
                                 ? () {
                                     if (_formKey.currentState!.validate()) {
-                                      submitForm();
+                                      createData();
                                     }
                                   }
                                 : null,
@@ -281,67 +291,56 @@ class _NewProfileState extends State<NewProfile> {
     );
   }
 
-  //addStudents() async {
-  // await ref.set({
-  //   "name": _nameController.value.text,
-  //   "email": _emailController.value.text,
-  //   "id_number": _idNumberController.value.text,
-  //   "condition_type": _conditionTypeController.value.text,
-  // });
-  //}
+  // uploadFile(txtName, txtEmail, txtid_number, txtcondition_type) async {
+  //   // upload file to firebase storage
+  //   //create reference to the firebase storage bucket
+  //   final FirebaseStorage storage = FirebaseStorage.instance;
+  //   final Reference storageReference =
+  //       storage.ref().child('profile_pictures_of_dss');
 
-  Future<void> submitForm() async {
-    final txtName = _nameController.value.text;
-    final txtemail = _emailController.value.text;
-    final txtid_number = _idNumberController.value.text;
-    final txtcondition_type = _conditionTypeController.value.text;
+  //   if (files.isNotEmpty) {
+  //     final imageXFile = files.last;
+  //     //upload file
+  //     final file = File(imageXFile.path);
+  //     final TaskSnapshot taskSnapshot = await storageReference.putFile(file);
 
-    //convert XFIle to file
+  //     final imageURL =
+  //         await taskSnapshot.ref.getDownloadURL(); //get download url
 
-    uploadFile(
-      txtName,
-      txtemail,
-      txtid_number,
-      txtcondition_type,
-    );
-  }
+  //     DatabaseReference reference =
+  //         FirebaseDatabase.instance.reference().child('students');
 
-  uploadFile(txtName, txtEmail, txtid_number, txtcondition_type) async {
-    // upload file to firebase storage
-    //create reference to the firebase storage bucket
-    final FirebaseStorage storage = FirebaseStorage.instance;
-    final Reference storageReference =
-        storage.ref().child('profile_pictures_of_dss');
+  //     reference
+  //         .push()
+  //         .set({
+  //           'name': txtName,
+  //           'email': txtEmail,
+  //           'id_number': txtid_number,
+  //           'condition_type': txtcondition_type,
+  //           'imageURL': imageURL
+  //         })
+  //         .then((value) => {
+  //               //data successfully submitted
+  //               print('Data stored successfully')
+  //             })
+  //         .catchError((error) {
+  //           //handle error
+  //           print('Data did not get saved successfully');
+  //         });
+  //   } else {}
+  // }
 
-    if (files.isNotEmpty) {
-      final imageXFile = files.last;
-      //upload file
-      final file = File(imageXFile.path);
-      final TaskSnapshot taskSnapshot = await storageReference.putFile(file);
+  Future createData() async {
+    final userCollection = FirebaseFirestore.instance.collection("students");
 
-      final imageURL =
-          await taskSnapshot.ref.getDownloadURL(); //get download url
+    final docRef =
+        userCollection.doc(); //firebase will run random ids for each document
 
-      DatabaseReference reference =
-          FirebaseDatabase.instance.reference().child('Students');
-
-      reference
-          .push()
-          .set({
-            'name': txtName,
-            'email': txtEmail,
-            'id_number': txtid_number,
-            'condition_type': txtcondition_type,
-            'imageURL': imageURL
-          })
-          .then((value) => {
-                //data successfully submitted
-                print('Data stored successfully')
-              })
-          .catchError((error) {
-            //handle error
-            print('Data did not get saved successfully');
-          });
-    } else {}
+    await docRef.set({
+      "idnumber": _idNumberController.text,
+      "name": _nameController.text,
+      "email": _emailController.text,
+      "condition": _conditionTypeController.text
+    });
   }
 }

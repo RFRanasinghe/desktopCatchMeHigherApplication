@@ -19,12 +19,28 @@ import 'package:desktopcatchmehigher/welcomepage.dart';
 import 'package:desktopcatchmehigher/existingprofile.dart';
 import 'package:desktopcatchmehigher/newprofile.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+        options: FirebaseOptions(
+            apiKey: "AIzaSyCay4lrEX25x0CYb55_X83BD5Djb3HQCCU",
+            authDomain: "webappfordds.firebaseapp.com",
+            projectId: "webappfordds",
+            storageBucket: "webappfordds.appspot.com",
+            messagingSenderId: "1088750822310",
+            appId: "1:1088750822310:web:c052bf5a557b066d696567"));
+  } else {
+    await Firebase.initializeApp();
+  }
+
+  await Firebase.initializeApp();
+
   ///initializeDefault();
   runApp(MaterialApp(
     title: "Catch Me Higher with Down Syndrome",
