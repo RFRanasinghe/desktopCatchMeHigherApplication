@@ -1,20 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:desktop_drop/desktop_drop.dart';
-import 'package:desktopcatchmehigher/widget/dropzoneWidget.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
-import 'package:flutter_dropzone/flutter_dropzone.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+//import 'package:image_picker_web/image_picker_web.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
-import 'package:image_picker_windows/image_picker_windows.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-//import 'dart:html';
+import 'package:image_picker_web_redux/image_picker_web_redux.dart';
+import 'dart:async';
+import 'dart:html';
+import 'dart:typed_data';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NewProfile extends StatefulWidget {
   const NewProfile({Key? key}) : super(key: key);
@@ -24,19 +28,19 @@ class NewProfile extends StatefulWidget {
 }
 
 class _NewProfileState extends State<NewProfile> {
-  //final databaseReference = FirebaseDatabase.instance.reference();
   final _formKey = GlobalKey<FormState>();
 
   bool isButtonActive = true;
-  late DropzoneViewController controller;
-  final Set<XFile> files = {};
-
-  //DatabaseReference ref = FirebaseDatabase.instance.ref("students");
 
   TextEditingController _idNumberController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _conditionTypeController = TextEditingController();
+
+  late String _imageDownloadUrl;
+  late Uint8List _imageBytes;
+  // final storage =
+  //     FirebaseStorage.instanceFor(bucket: "gs://webappfordds.appspot.com");
 
   @override
   void dispose() {
@@ -47,38 +51,34 @@ class _NewProfileState extends State<NewProfile> {
     super.dispose();
   }
 
-  // Widget buildFile(XFile file) {
-  //   final isJPG = file.path.endsWith('jpg');
-  //   final isPNG = file.path.endsWith('png');
-  //   final isJPEG = file.path.endsWith('jpeg');
+  Future<void> _pickImage() async {
+    final pickedImage =
+        await ImagePickerWeb.getImage(outputType: ImageType.bytes);
+    if (pickedImage != null) {
+      setState(() {
+        _imageBytes = pickedImage;
+      });
+    }
+  }
 
-  //   if (isJPG) {
-  //     return Image.file(
-  //       File(file.path),
-  //       width: 50,
-  //       height: 50,
-  //       fit: BoxFit.cover,
-  //     );
-  //   }
-  //   if (isPNG) {
-  //     return Image.file(
-  //       File(file.path),
-  //       width: 50,
-  //       height: 50,
-  //       fit: BoxFit.cover,
-  //     );
-  //   }
-  //   if (isJPEG) {
-  //     return Image.file(
-  //       File(file.path),
-  //       width: 50,
-  //       height: 50,
-  //       fit: BoxFit.cover,
-  //     );
-  //   } else {
-  //     return Text("No Preview");
-  //   }
-  // }
+  Future<void> _uploadImage() async {
+    if (_imageBytes == null) {
+      return;
+    }
+
+    final storageRef = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('student_images')
+        .child(DateTime.now().toIso8601String());
+
+    final uploadTask = storageRef.putData(_imageBytes);
+    final snapshot = await uploadTask.whenComplete(() => null);
+    final downloadUrl = await snapshot.ref.getDownloadURL();
+
+    setState(() {
+      _imageDownloadUrl = downloadUrl;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,9 +126,7 @@ class _NewProfileState extends State<NewProfile> {
                         }
                         return null;
                       },
-                      onSaved: (value) {
-                        //_name = value;
-                      },
+                      onSaved: (value) {},
                     ),
                   ),
                   Padding(
@@ -199,24 +197,48 @@ class _NewProfileState extends State<NewProfile> {
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        DropTarget(
-                          onDragDone: (urls) {
-                            setState(() =>
-                                {files.clear(), files.add(urls.files.last)});
-                          },
-                          child: Container(
-                            color: Colors.green,
-                            height: 100.0,
-                            child: Center(
-                              child: Text(
-                                "Drag & drop your image",
-                                style: TextStyle(
-                                  fontSize: 20,
+                        Container(
+                          //color: Colors.green,
+                          height: 140.0,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Select your image",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      ElevatedButton(
+                                        onPressed: _pickImage,
+                                        child: Text("Pick Image"),
+                                      ),
+                                      // ElevatedButton(
+                                      //   onPressed: () async {
+                                      //     var picked = await FilePicker.platform
+                                      //         .pickFiles();
+                                      //     if (picked != null) {
+                                      //       print(picked.files.first.name);
+                                      //     } else {
+                                      //       print(
+                                      //           "Image upload did not support");
+                                      //     }
+                                      //   },
+                                      //   child: Text("Upload image"),
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
+                        //),
                         SizedBox(height: 12.0),
                         SingleChildScrollView(
                           child: Row(
@@ -291,46 +313,9 @@ class _NewProfileState extends State<NewProfile> {
     );
   }
 
-  // uploadFile(txtName, txtEmail, txtid_number, txtcondition_type) async {
-  //   // upload file to firebase storage
-  //   //create reference to the firebase storage bucket
-  //   final FirebaseStorage storage = FirebaseStorage.instance;
-  //   final Reference storageReference =
-  //       storage.ref().child('profile_pictures_of_dss');
-
-  //   if (files.isNotEmpty) {
-  //     final imageXFile = files.last;
-  //     //upload file
-  //     final file = File(imageXFile.path);
-  //     final TaskSnapshot taskSnapshot = await storageReference.putFile(file);
-
-  //     final imageURL =
-  //         await taskSnapshot.ref.getDownloadURL(); //get download url
-
-  //     DatabaseReference reference =
-  //         FirebaseDatabase.instance.reference().child('students');
-
-  //     reference
-  //         .push()
-  //         .set({
-  //           'name': txtName,
-  //           'email': txtEmail,
-  //           'id_number': txtid_number,
-  //           'condition_type': txtcondition_type,
-  //           'imageURL': imageURL
-  //         })
-  //         .then((value) => {
-  //               //data successfully submitted
-  //               print('Data stored successfully')
-  //             })
-  //         .catchError((error) {
-  //           //handle error
-  //           print('Data did not get saved successfully');
-  //         });
-  //   } else {}
-  // }
-
   Future createData() async {
+    await _uploadImage();
+
     final userCollection = FirebaseFirestore.instance.collection("students");
 
     final docRef =
@@ -340,7 +325,12 @@ class _NewProfileState extends State<NewProfile> {
       "idnumber": _idNumberController.text,
       "name": _nameController.text,
       "email": _emailController.text,
-      "condition": _conditionTypeController.text
+      "condition": _conditionTypeController.text,
+      "image_url": _imageDownloadUrl
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Student data saved successfully"),
+    ));
   }
 }
