@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cross_file/cross_file.dart';
-import 'package:desktop_drop/desktop_drop.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-//import 'package:image_picker_web/image_picker_web.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -39,8 +37,6 @@ class _NewProfileState extends State<NewProfile> {
 
   late String _imageDownloadUrl;
   late Uint8List _imageBytes;
-  // final storage =
-  //     FirebaseStorage.instanceFor(bucket: "gs://webappfordds.appspot.com");
 
   @override
   void dispose() {
@@ -58,11 +54,17 @@ class _NewProfileState extends State<NewProfile> {
       setState(() {
         _imageBytes = pickedImage;
       });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Studet imaged inserted successfully"),
+      ));
     }
   }
 
   Future<void> _uploadImage() async {
     if (_imageBytes == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Student Image did not get upload properly"),
+      ));
       return;
     }
 
@@ -218,19 +220,6 @@ class _NewProfileState extends State<NewProfile> {
                                         onPressed: _pickImage,
                                         child: Text("Pick Image"),
                                       ),
-                                      // ElevatedButton(
-                                      //   onPressed: () async {
-                                      //     var picked = await FilePicker.platform
-                                      //         .pickFiles();
-                                      //     if (picked != null) {
-                                      //       print(picked.files.first.name);
-                                      //     } else {
-                                      //       print(
-                                      //           "Image upload did not support");
-                                      //     }
-                                      //   },
-                                      //   child: Text("Upload image"),
-                                      // ),
                                     ],
                                   ),
                                 ),
