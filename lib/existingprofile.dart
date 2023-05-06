@@ -50,10 +50,11 @@ class _ExistingProfileState extends State<ExistingProfile> {
                 subtitle: Text(item?['condition']),
                 leading: IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.local_activity_rounded),
+                  icon: Icon(Icons.local_activity_rounded,
+                      color: Color.fromARGB(255, 1, 41, 75)),
                 ),
                 trailing: IconButton(
-                  icon: Icon(Icons.fact_check_sharp),
+                  icon: Icon(Icons.fact_check_sharp, color: Colors.red),
                   onPressed: () {},
                 ),
               );
