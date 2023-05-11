@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desktopcatchmehigher/colorSelection.dart';
 import 'package:desktopcatchmehigher/selectionThree.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'logged_in_user_model.dart';
 
 class SelectionActivityTwoPage extends StatefulWidget {
   const SelectionActivityTwoPage({Key? key}) : super(key: key);
@@ -163,7 +167,7 @@ class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        correctAnswer = true;
+                        incorrectAnswer = true;
                       });
                       // Future.delayed(Duration(seconds: 6)).then((value) => {
                       //       setState(() {
@@ -180,7 +184,7 @@ class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "Green",
+                        "Red",
                         style: TextStyle(
                           fontSize: 30,
                         ),
@@ -190,7 +194,7 @@ class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        incorrectAnswer = true;
+                        handleCorrectButtonPress();
                       });
                     },
                     style: ElevatedButton.styleFrom(
@@ -272,5 +276,45 @@ class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
         ),
       ),
     );
+  }
+
+  Future<void> handleCorrectButtonPress() async {
+    setState(() {
+      correctAnswer = true;
+    });
+    final uid = Provider.of<LoggedInUserModel>(context, listen: false)
+        .loggedInUser!
+        .uid;
+
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('students')
+          .where('uid', isEqualTo: uid)
+          .limit(1)
+          .get();
+
+      final snapshot = await docRef;
+
+      if (snapshot.docs.isNotEmpty) {
+        final doc = snapshot.docs.first;
+        final data = doc.data();
+
+        if (data.containsKey('colorSelectionMarks')) {
+          final currentMarks = data['colorSelectionMarks'] as int;
+          await doc.reference.update({'colorSelectionMarks': currentMarks + 1});
+        } else {
+          await doc.reference.update({'colorSelectionMarks': 1});
+        }
+      }
+    } catch (error) {
+      print('Error updating marks: $error');
+    }
+
+    Future.delayed(Duration(seconds: 2)).then((value) => {
+          setState(() {
+            correctAnswer = false;
+          }),
+          Navigator.pushNamed(context, 'selectionThree'),
+        });
   }
 }

@@ -58,7 +58,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       width: 400,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, 'existingprofile');
+                          Navigator.pushNamed(context, 'userlogin');
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
@@ -80,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ElevatedButton.icon(
                     icon: Icon(Icons.local_activity_sharp),
                     onPressed: () {
-                      Navigator.pushNamed(context, 'AdminMonitorPage');
+                      Navigator.pushNamed(context, 'admin');
                     },
                     label: Text(
                       "Admin",

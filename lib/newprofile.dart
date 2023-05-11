@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:file_picker/file_picker.dart';
@@ -34,6 +36,23 @@ class _NewProfileState extends State<NewProfile> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _conditionTypeController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  final _activities = [
+    'Colour Selection',
+    'Colour Filling',
+    'Counting Numbers',
+    'Pattern Recognition'
+  ];
+  Map<String, bool> _selectedActivities = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _activities.forEach((activity) {
+      _selectedActivities[activity] = false;
+    });
+  }
 
   late String _imageDownloadUrl;
   late Uint8List _imageBytes;
@@ -96,7 +115,7 @@ class _NewProfileState extends State<NewProfile> {
       ),
       body: Center(
         child: Container(
-          margin: EdgeInsets.all(20.0),
+          //margin: EdgeInsets.all(20.0),
           alignment: Alignment.center,
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -105,7 +124,8 @@ class _NewProfileState extends State<NewProfile> {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding:
+                EdgeInsets.only(left: 10.0, right: 10.0, top: 5.0, bottom: 5.0),
             child: Form(
               key: _formKey,
               child: Column(
@@ -193,56 +213,36 @@ class _NewProfileState extends State<NewProfile> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Text("Upload Image of the Student"),
+                    child: TextFormField(
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Please enter the password of the student';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {},
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          //color: Colors.green,
-                          height: 140.0,
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Select your image",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      ElevatedButton(
-                                        onPressed: _pickImage,
-                                        child: Text("Pick Image"),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        //),
-                        SizedBox(height: 12.0),
-                        SingleChildScrollView(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            //children: files.map(buildFile).toList(),
-                          ),
-                        ),
-                      ],
+                    child: ElevatedButton(
+                      onPressed: _pickImage,
+                      child: Text("Pick Image"),
                     ),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(left: 150.0, top: 10.0),
+                        padding: EdgeInsets.only(left: 150.0, top: 30.0),
                         child: SizedBox(
                           width: 200,
                           height: 50,
@@ -275,7 +275,7 @@ class _NewProfileState extends State<NewProfile> {
                           height: 60,
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'activityHome');
+                              Navigator.pushNamed(context, 'userlogin');
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.pink,
@@ -284,7 +284,7 @@ class _NewProfileState extends State<NewProfile> {
                               ),
                             ),
                             label: Text(
-                              "Activity Home",
+                              "Log In",
                               style: TextStyle(fontSize: 30),
                             ),
                             icon: Icon(Icons.keyboard_option_key_sharp),
@@ -303,23 +303,44 @@ class _NewProfileState extends State<NewProfile> {
   }
 
   Future createData() async {
-    await _uploadImage();
+    try {
+      await _uploadImage();
 
-    final userCollection = FirebaseFirestore.instance.collection("students");
+      // Get a reference to the "students" collection
+      final userCollection = FirebaseFirestore.instance.collection("students");
 
-    final docRef =
-        userCollection.doc(); //firebase will run random ids for each document
+      // Create a new document with a random ID
+      final docRef = userCollection.doc();
 
-    await docRef.set({
-      "idnumber": _idNumberController.text,
-      "name": _nameController.text,
-      "email": _emailController.text,
-      "condition": _conditionTypeController.text,
-      "image_url": _imageDownloadUrl
-    });
+      // Create the user using the email and ID number provided
+      final userCredentials = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("Student data saved successfully"),
-    ));
+      // Get the authenticated user's ID
+      final userId = userCredentials.user!.uid;
+
+      // Add the student data to the "students" collection, using the authenticated user's ID as the document ID
+      await userCollection.doc(userId).set({
+        "uid": userId,
+        "idnumber": _idNumberController.text,
+        "name": _nameController.text,
+        "email": _emailController.text,
+        "condition": _conditionTypeController.text,
+        "image_url": _imageDownloadUrl,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      // Show a success message
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Student data saved successfully"),
+      ));
+    } catch (e) {
+      // Show an error message if there was a problem
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("An error occurred while saving student data"),
+      ));
+      print(e.toString());
+    }
   }
 }

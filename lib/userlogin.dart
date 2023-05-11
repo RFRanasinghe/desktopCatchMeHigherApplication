@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+
+import 'logged_in_user_model.dart';
 
 class UserLoginPage extends StatefulWidget {
   const UserLoginPage({Key? key}) : super(key: key);
@@ -11,15 +14,16 @@ class UserLoginPage extends StatefulWidget {
 }
 
 class _UserLoginPageState extends State<UserLoginPage> {
+  // User? _loggedInUser;
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _idNumberController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   String _errorMessage = "";
 
   @override
   void dispose() {
-    _idNumberController.dispose();
-    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -30,21 +34,42 @@ class _UserLoginPageState extends State<UserLoginPage> {
 
     final form = _formKey.currentState;
     if (form!.validate()) {
-      final id = _idNumberController.text.trim();
-      final name = _nameController.text.trim();
+      final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
 
-      final userCollection = FirebaseFirestore.instance.collection("students");
-      final querySnapshot = await userCollection
-          .where("idnumber", isEqualTo: id)
-          .where("name", isEqualTo: name)
-          .get();
+      try {
+        final userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
 
-      if (querySnapshot.docs.isNotEmpty) {
+        final user = userCredential.user;
+        final uid = user!.uid;
+        if (user != null) {
+          final loggedInUserModel =
+              Provider.of<LoggedInUserModel>(context, listen: false);
+          loggedInUserModel.setLoggedInUser(
+            AppUser(
+              email: email,
+              uid: uid,
+            ),
+            email: email,
+            uid: uid,
+          );
+        } else {
+          throw 'User is null';
+        }
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Log in successful"),
+        ));
         Navigator.pushNamed(context, 'activityHome');
-      } else {
-        setState(() {
-          _errorMessage = "Invalid credentials";
-        });
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Invalid credentials"),
+        ));
+        print(e.toString());
       }
     }
   }
@@ -77,14 +102,14 @@ class _UserLoginPageState extends State<UserLoginPage> {
                     height: 20.0,
                   ),
                   TextFormField(
-                      controller: _idNumberController,
+                      controller: _emailController,
                       decoration: InputDecoration(
-                        labelText: "Id number",
+                        labelText: "Email Address",
                         border: OutlineInputBorder(),
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please enter your ID";
+                          return "Please enter your Email";
                         }
                         return null;
                       }),
@@ -92,14 +117,14 @@ class _UserLoginPageState extends State<UserLoginPage> {
                     height: 20.0,
                   ),
                   TextFormField(
-                      controller: _nameController,
+                      controller: _passwordController,
                       decoration: InputDecoration(
-                        labelText: "Name",
+                        labelText: "Password",
                         border: OutlineInputBorder(),
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Please enter your name";
+                          return "Please enter your password";
                         }
                       }),
                   SizedBox(
@@ -114,30 +139,6 @@ class _UserLoginPageState extends State<UserLoginPage> {
             ),
           ),
         ),
-        // child: Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     TextField(
-        //       controller: _nameController,
-        //       decoration: InputDecoration(
-        //         labelText: "Name",
-        //       ),
-        //     ),
-        //     SizedBox(
-        //       height: 20,
-        //     ),
-        //     TextField(
-        //       controller: _idNumberController,
-        //       decoration: InputDecoration(
-        //         labelText: "ID number",
-        //       ),
-        //     ),
-        //     ElevatedButton(
-        //       onPressed: () {},
-        //       child: Text("LogIn"),
-        //     ),
-        //   ],
-        // ),
       ),
     );
   }

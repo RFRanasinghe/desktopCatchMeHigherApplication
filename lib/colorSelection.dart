@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desktopcatchmehigher/activityHome.dart';
 import 'package:desktopcatchmehigher/selectionTwo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+import 'logged_in_user_model.dart';
 
 class ColorSelection extends StatefulWidget {
   const ColorSelection({Key? key}) : super(key: key);
@@ -164,14 +168,7 @@ class _ColorSelectionState extends State<ColorSelection> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        correctAnswer = true;
-                      });
-                      Future.delayed(Duration(seconds: 2)).then((value) => {
-                            setState(() {
-                              correctAnswer = false;
-                            }),
-                          });
+                      handleCorrectButtonPress();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
@@ -274,5 +271,45 @@ class _ColorSelectionState extends State<ColorSelection> {
         ),
       ),
     );
+  }
+
+  Future<void> handleCorrectButtonPress() async {
+    setState(() {
+      correctAnswer = true;
+    });
+    final uid = Provider.of<LoggedInUserModel>(context, listen: false)
+        .loggedInUser!
+        .uid;
+
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('students')
+          .where('uid', isEqualTo: uid)
+          .limit(1)
+          .get();
+
+      final snapshot = await docRef;
+
+      if (snapshot.docs.isNotEmpty) {
+        final doc = snapshot.docs.first;
+        final data = doc.data();
+
+        if (data.containsKey('colorSelectionMarks')) {
+          final currentMarks = data['colorSelectionMarks'] as int;
+          await doc.reference.update({'colorSelectionMarks': currentMarks + 1});
+        } else {
+          await doc.reference.update({'colorSelectionMarks': 1});
+        }
+      }
+    } catch (error) {
+      print('Error updating marks: $error');
+    }
+
+    Future.delayed(Duration(seconds: 2)).then((value) => {
+          setState(() {
+            correctAnswer = false;
+          }),
+          Navigator.pushNamed(context, 'selectionTwo'),
+        });
   }
 }

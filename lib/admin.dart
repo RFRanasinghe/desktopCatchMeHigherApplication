@@ -20,13 +20,11 @@ class _AdminMonitorPageState extends State<AdminMonitorPage> {
         child: Container(
           margin: EdgeInsets.all(20.0),
           alignment: Alignment.center,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(''),
-              ),
-          ),
+          child: ElevatedButton(
+            onPressed: () {},
+            child: Text("Show student results"),),
         ),
-        ),
+      ),
     );
   }
 }

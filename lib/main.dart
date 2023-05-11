@@ -24,6 +24,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'logged_in_user_model.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,53 +47,32 @@ Future main() async {
   await Firebase.initializeApp();
 
   ///initializeDefault();
-  runApp(MaterialApp(
-    title: "Catch Me Higher with Down Syndrome",
-    debugShowCheckedModeBanner: false,
-    initialRoute: 'welcomepage',
-    routes: {
-      'welcomepage': (context) => WelcomePage(),
-      'newprofile': (context) => NewProfile(),
-      'existingprofile': (context) => ExistingProfile(),
-      'activityHome': (context) => ActivityHomePage(),
-      'colorSelection': (context) => ColorSelection(),
-      'selectionTwo': (context) => SelectionActivityTwoPage(),
-      'selectionThree': (context) => SelectionActivityThreePage(),
-      'colorFilling': (context) => ColorFillingPage(),
-      'countingNum': (context) => CountingNumbers(),
-      'countTwo': (context) => CountTwoActivity(),
-      'countThree': (context) => CountThreeActivity(),
-      'countFour': (context) => CountFourActivity(),
-      'patternRecognition': (context) => PatternRecognition(),
-      'patternTwo': (context) => PatternTwoActivity(),
-      'patternThree': (context) => PatternThreeActivityPage(),
-      'patternFour': (context) => PatternFourPage(),
-      'admin': (context) => AdminMonitorPage(),
-      'fillingTwo': (context) => ColorFillingSecondPage(),
-      'userlogin': (context) => UserLoginPage(),
-    },
-  ));
+  runApp(ChangeNotifierProvider<LoggedInUserModel>(
+      create: (context) => LoggedInUserModel(),
+      child: MaterialApp(
+        title: "Catch Me Higher with Down Syndrome",
+        debugShowCheckedModeBanner: false,
+        initialRoute: 'welcomepage',
+        routes: {
+          'welcomepage': (context) => WelcomePage(),
+          'newprofile': (context) => NewProfile(),
+          'existingprofile': (context) => ExistingProfile(),
+          'activityHome': (context) => ActivityHomePage(),
+          'colorSelection': (context) => ColorSelection(),
+          'selectionTwo': (context) => SelectionActivityTwoPage(),
+          'selectionThree': (context) => SelectionActivityThreePage(),
+          'colorFilling': (context) => ColorFillingPage(),
+          'countingNum': (context) => CountingNumbers(),
+          'countTwo': (context) => CountTwoActivity(),
+          'countThree': (context) => CountThreeActivity(),
+          'countFour': (context) => CountFourActivity(),
+          'patternRecognition': (context) => PatternRecognition(),
+          'patternTwo': (context) => PatternTwoActivity(),
+          'patternThree': (context) => PatternThreeActivityPage(),
+          'patternFour': (context) => PatternFourPage(),
+          'admin': (context) => AdminMonitorPage(),
+          'fillingTwo': (context) => ColorFillingSecondPage(),
+          'userlogin': (context) => UserLoginPage(),
+        },
+      )));
 }
-
-// initializeDefault() async {
-//   //initializing the Firebase to the main file
-//   try {
-//     WidgetsFlutterBinding.ensureInitialized();
-
-//     // FirebaseApp app = await Firebase.initializeApp(
-//     //     name: "WebPatchMeHigher",
-//     //     options: const FirebaseOptions(
-//     //         apiKey: "AIzaSyCLjMDb_FdCOyTqaEgoUhR3tv2EsHU-GcY",
-//     //         authDomain: "desktopappdatabase.firebaseapp.com",
-//     //         databaseURL:
-//     //             "https://desktopappdatabase-default-rtdb.firebaseio.com",
-//     //         projectId: "desktopappdatabase",
-//     //         storageBucket: "desktopappdatabase.appspot.com",
-//     //         messagingSenderId: "861575985303",
-//     //         appId: "1:861575985303:web:69bf4c3418f59fd171d1d2",
-//     //         measurementId: "G-J3XDQ1R8WL"));
-//     // print('Initialized default app $app');
-//   } catch (ex) {
-//     print('Re-check building the connection through Firebase');
-//   }
-// }
