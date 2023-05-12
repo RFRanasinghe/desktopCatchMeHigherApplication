@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desktopcatchmehigher/countThree.dart';
 import 'package:desktopcatchmehigher/existingprofile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'logged_in_user_model.dart';
 
 class CountFourActivity extends StatefulWidget {
   const CountFourActivity({Key? key}) : super(key: key);
@@ -160,14 +164,7 @@ class _CountFourActivityState extends State<CountFourActivity> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        correctAnswer = true;
-                      });
-                      // Future.delayed(Duration(seconds: 6)).then((value) => {
-                      //       setState(() {
-                      //         correctAnswer = false;
-                      //       }),
-                      //     });
+                      handleCorrectButtonPress();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 204, 200, 200),
@@ -267,5 +264,45 @@ class _CountFourActivityState extends State<CountFourActivity> {
         ),
       ),
     );
+  }
+
+  Future<void> handleCorrectButtonPress() async {
+    setState(() {
+      correctAnswer = true;
+    });
+    final uid = Provider.of<LoggedInUserModel>(context, listen: false)
+        .loggedInUser!
+        .uid;
+
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('students')
+          .where('uid', isEqualTo: uid)
+          .limit(1)
+          .get();
+
+      final snapshot = await docRef;
+
+      if (snapshot.docs.isNotEmpty) {
+        final doc = snapshot.docs.first;
+        final data = doc.data();
+
+        if (data.containsKey('countSelectionMarks')) {
+          final currentMarks = data['countSelectionMarks'] as int;
+          await doc.reference.update({'countSelectionMarks': currentMarks + 1});
+        } else {
+          await doc.reference.update({'countSelectionMarks': 1});
+        }
+      }
+    } catch (error) {
+      print('Error updating marks: $error');
+    }
+
+    Future.delayed(Duration(seconds: 2)).then((value) => {
+          setState(() {
+            correctAnswer = false;
+          }),
+          Navigator.pushNamed(context, 'activityHome'),
+        });
   }
 }

@@ -2,6 +2,11 @@ import 'package:desktopcatchmehigher/activityHome.dart';
 import 'package:desktopcatchmehigher/countTwo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'logged_in_user_model.dart';
 
 class CountingNumbers extends StatefulWidget {
   const CountingNumbers({Key? key}) : super(key: key);
@@ -182,14 +187,7 @@ class _CountingNumbersState extends State<CountingNumbers> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        correctAnswer = true;
-                      });
-                      // Future.delayed(Duration(seconds: 6)).then((value) => {
-                      //       setState(() {
-                      //         correctAnswer = false;
-                      //       }),
-                      //     });
+                      handleCorrectButtonPress();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
@@ -267,5 +265,45 @@ class _CountingNumbersState extends State<CountingNumbers> {
         ),
       ),
     );
+  }
+
+  Future<void> handleCorrectButtonPress() async {
+    setState(() {
+      correctAnswer = true;
+    });
+    final uid = Provider.of<LoggedInUserModel>(context, listen: false)
+        .loggedInUser!
+        .uid;
+
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('students')
+          .where('uid', isEqualTo: uid)
+          .limit(1)
+          .get();
+
+      final snapshot = await docRef;
+
+      if (snapshot.docs.isNotEmpty) {
+        final doc = snapshot.docs.first;
+        final data = doc.data();
+
+        if (data.containsKey('countSelectionMarks')) {
+          final currentMarks = data['countSelectionMarks'] as int;
+          await doc.reference.update({'countSelectionMarks': currentMarks + 1});
+        } else {
+          await doc.reference.update({'countSelectionMarks': 1});
+        }
+      }
+    } catch (error) {
+      print('Error updating marks: $error');
+    }
+
+    Future.delayed(Duration(seconds: 2)).then((value) => {
+          setState(() {
+            correctAnswer = false;
+          }),
+          Navigator.pushNamed(context, 'countTwo'),
+        });
   }
 }

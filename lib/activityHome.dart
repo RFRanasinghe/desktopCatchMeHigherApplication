@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'logged_in_user_model.dart';
 
 class ActivityHomePage extends StatefulWidget {
   const ActivityHomePage({Key? key}) : super(key: key);
@@ -16,36 +17,15 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
-  Future<void> _logout() async {
-    await _auth.signOut();
-    await _firestore
-        .collection("students")
-        .doc(_auth.currentUser!.displayName!)
-        .update({"isLoggedIn": false});
+  // Future<void> _logout() async {
+  //   await _auth.signOut();
+  //   await _firestore
+  //       .collection("students")
+  //       .doc(_auth.currentUser!.displayName!)
+  //       .update({"isLoggedIn": false});
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("Log out successful"),
-    ));
-    Navigator.pushNamed(context, 'userlogin');
-  }
-  // final _formKey = GlobalKey<FormState>();
-  // final _nameController = TextEditingController();
-  // final _idNumberController = TextEditingController();
-
-  // Future<void> logout() async {
-  //   final userCollection = FirebaseFirestore.instance.collection("students");
-  //   final userDoc = await userCollection
-  //       .where("idnumber", isEqualTo: _idNumberController.text.trim())
-  //       .where("name", isEqualTo: _nameController.text.trim())
-  //       .get()
-  //       .then((QuerySnapshot) => QuerySnapshot.docs.first);
-
-  //   await userCollection.doc(userDoc.id).update({
-  //     'loggedIn': false,
-  //     'lastLogout': DateTime.now(),
-  //   });
   //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //     content: Text("Logged out successfully"),
+  //     content: Text("Log out successful"),
   //   ));
   //   Navigator.pushNamed(context, 'userlogin');
   // }
@@ -172,7 +152,9 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 1400.0),
                   child: ElevatedButton(
-                    onPressed: _logout,
+                    onPressed: () {
+                      // _logout();
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                     ),

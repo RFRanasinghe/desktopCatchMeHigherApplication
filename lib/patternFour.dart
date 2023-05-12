@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desktopcatchmehigher/existingprofile.dart';
 import 'package:desktopcatchmehigher/patternThree.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'logged_in_user_model.dart';
 
 class PatternFourPage extends StatefulWidget {
   const PatternFourPage({Key? key}) : super(key: key);
@@ -245,5 +249,46 @@ class _PatternFourPageState extends State<PatternFourPage> {
         ),
       ),
     );
+  }
+
+  Future<void> handleCorrectButtonPress() async {
+    setState(() {
+      correctAnswer = true;
+    });
+    final uid = Provider.of<LoggedInUserModel>(context, listen: false)
+        .loggedInUser!
+        .uid;
+
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('students')
+          .where('uid', isEqualTo: uid)
+          .limit(1)
+          .get();
+
+      final snapshot = await docRef;
+
+      if (snapshot.docs.isNotEmpty) {
+        final doc = snapshot.docs.first;
+        final data = doc.data();
+
+        if (data.containsKey('patternRecognitionMarks')) {
+          final currentMarks = data['patternRecognitionMarks'] as int;
+          await doc.reference
+              .update({'patternRecognitionMarks': currentMarks + 1});
+        } else {
+          await doc.reference.update({'patternRecognitionMarks': 1});
+        }
+      }
+    } catch (error) {
+      print('Eror updating marks: $error');
+    }
+
+    Future.delayed(Duration(seconds: 2)).then((value) => {
+          setState(() {
+            correctAnswer = false;
+          }),
+          Navigator.pushNamed(context, 'activityHome'),
+        });
   }
 }
