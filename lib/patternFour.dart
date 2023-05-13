@@ -1,3 +1,4 @@
+import 'package:desktopcatchmehigher/activityHome.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desktopcatchmehigher/existingprofile.dart';
 import 'package:desktopcatchmehigher/patternThree.dart';
@@ -99,7 +100,9 @@ class _PatternFourPageState extends State<PatternFourPage> {
                       ),
                       ElevatedButton.icon(
                         icon: Icon(Icons.try_sms_star_sharp),
-                        onPressed: () {},
+                        onPressed: () {
+                          resetScoreAgain();
+                        },
                         label: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Text(
@@ -115,7 +118,13 @@ class _PatternFourPageState extends State<PatternFourPage> {
                         ),
                       ),
                       ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ActivityHomePage()),
+                          );
+                        },
                         icon: Icon(Icons.stop_sharp),
                         label: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -290,5 +299,44 @@ class _PatternFourPageState extends State<PatternFourPage> {
           }),
           Navigator.pushNamed(context, 'activityHome'),
         });
+  }
+
+  Future<void> resetScoreAgain() async {
+    final uid = Provider.of<LoggedInUserModel>(context, listen: false)
+        .loggedInUser!
+        .uid;
+
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('scores')
+          .where('uid', isEqualTo: uid)
+          .where('date',
+              isEqualTo: DateTime.now().toIso8601String().substring(0, 10))
+          .limit(1)
+          .get();
+
+      final snapshot = await docRef;
+
+      if (snapshot.docs.isNotEmpty) {
+        final doc = snapshot.docs.first;
+        final data = doc.data();
+
+        if (data.containsKey('patternRecognitionMarks')) {
+          final currentMarks = data['patternRecognitionMarks'] as int;
+          await doc.reference.update({'patternRecognitionMarks': 0});
+        } else {
+          await doc.reference.update({'patternRecognitionMarks': 0});
+        }
+      } else {
+        await FirebaseFirestore.instance.collection('scores').add({
+          'uid': uid,
+          'patternRecognitionMarks': 0,
+          'date': DateTime.now().toIso8601String().substring(0, 10),
+        });
+      }
+      Navigator.pushNamed(context, 'patternRecognition');
+    } catch (error) {
+      print('Error updating marks: $error');
+    }
   }
 }
