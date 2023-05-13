@@ -17,9 +17,12 @@ class SelectionActivityTwoPage extends StatefulWidget {
 }
 
 class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
+
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
   var correctAnswer = false;
   var incorrectAnswer = false;
+  
   @override
   Widget build(BuildContext context) {
     final loggedIn = Provider.of<LoggedInUserModel>(context);
