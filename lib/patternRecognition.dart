@@ -24,34 +24,6 @@ class _PatternRecognitionState extends State<PatternRecognition> {
       buttonSelected = indexButton;
     });
   }
-  // var buttonA = false;
-  // var buttonB = false;
-  // var buttonC = false;
-  // var buttonD = false;
-
-  // void disableButtonA() {
-  //   setState(() {
-  //     buttonA = true;
-  //   });
-  // }
-
-  // void disableButtonB() {
-  //   setState(() {
-  //     buttonB = true;
-  //   });
-  // }
-
-  // void disableButtonC() {
-  //   setState(() {
-  //     buttonC = true;
-  //   });
-  // }
-
-  // void disableButtonD() {
-  //   setState(() {
-  //     buttonD = true;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {

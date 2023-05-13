@@ -14,162 +14,192 @@ class ActivityHomePage extends StatefulWidget {
 }
 
 class _ActivityHomePageState extends State<ActivityHomePage> {
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
-  // Future<void> _logout() async {
-  //   await _auth.signOut();
-  //   await _firestore
-  //       .collection("students")
-  //       .doc(_auth.currentUser!.displayName!)
-  //       .update({"isLoggedIn": false});
+  Future<void> logout() async {
+    await _auth.signOut();
 
-  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //     content: Text("Log out successful"),
-  //   ));
-  //   Navigator.pushNamed(context, 'userlogin');
-  // }
+    if (_auth.currentUser == null) {
+      final loggedInUserModel =
+          Provider.of<LoggedInUserModel>(context, listen: false);
+      loggedInUserModel.setLoggedInUser(
+        AppUser(
+          email: "",
+          uid: "",
+        ),
+        email: "",
+        uid: "",
+      );
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("You have logged out"),
+      ),
+    );
+
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      'userlogin',
+      (Route<dynamic> route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Activity House"),
+    final loggedInUserModel = Provider.of<LoggedInUserModel>(context);
+
+    if (loggedInUserModel.loggedInUser == null ||
+        loggedInUserModel.loggedInUser!.email!.isEmpty ||
+        loggedInUserModel.loggedInUser!.uid!.isEmpty) {
+      if (_navigatorKey.currentState!.canPop()) {
+        _navigatorKey.currentState!.pop();
+        Navigator.pushNamed(context, 'userlogin');
+      } else {
+        Navigator.pushNamed(context, 'userlogin');
+      }
+      return Container();
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text("Activity House"),
+          ),
         ),
-      ),
-      body: Center(
-        child: Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('images/papertool.jpg'),
-                fit: BoxFit.cover,
+        body: Center(
+          child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/papertool.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SizedBox(
-                    width: 400,
-                    child: new ElevatedButton(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: new Text(
-                          "Color Selection",
-                          style: TextStyle(
-                            fontSize: 30,
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SizedBox(
+                      width: 400,
+                      child: new ElevatedButton(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: new Text(
+                            "Color Selection",
+                            style: TextStyle(
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'colorSelection');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
                           ),
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'colorSelection');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SizedBox(
-                    width: 400,
-                    child: new ElevatedButton(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: new Text(
-                          "Color Filling",
-                          style: TextStyle(
-                            fontSize: 30,
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SizedBox(
+                      width: 400,
+                      child: new ElevatedButton(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: new Text(
+                            "Color Filling",
+                            style: TextStyle(
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'colorFilling');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
                           ),
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'colorFilling');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SizedBox(
-                    width: 400,
-                    child: new ElevatedButton(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: new Text(
-                          "Counting Numbers",
-                          style: TextStyle(
-                            fontSize: 30,
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SizedBox(
+                      width: 400,
+                      child: new ElevatedButton(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: new Text(
+                            "Counting Numbers",
+                            style: TextStyle(
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'countingNum');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
                           ),
                         ),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'countingNum');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SizedBox(
-                    width: 400,
-                    child: new ElevatedButton(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: new Text(
-                          "Pattern Recognition",
-                          style: TextStyle(
-                            fontSize: 30,
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: SizedBox(
+                      width: 400,
+                      child: new ElevatedButton(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: new Text(
+                            "Pattern Recognition",
+                            style: TextStyle(
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'patternRecognition');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 1400.0),
+                    child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, 'patternRecognition');
+                        logout();
                       },
                       style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
+                        backgroundColor: Colors.red,
                       ),
+                      child: Text("Log Out"),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 1400.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // _logout();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                    ),
-                    child: Text("Log Out"),
-                  ),
-                ),
-                Consumer<LoggedInUserModel>(
-                    builder: (context, loggedInUserModel, _) {
-                  return Text(loggedInUserModel.loggedInUser!.email! +
-                      " " +
-                      loggedInUserModel.loggedInUser!.uid!);
-                })
-              ],
-            )),
-      ),
-    );
+                  Consumer<LoggedInUserModel>(
+                      builder: (context, loggedInUserModel, _) {
+                    return Text(loggedInUserModel.loggedInUser!.email! +
+                        " " +
+                        loggedInUserModel.loggedInUser!.uid!);
+                  })
+                ],
+              )),
+        ),
+      );
+    }
   }
 }

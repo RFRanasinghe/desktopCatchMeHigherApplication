@@ -14,6 +14,7 @@ class UserLoginPage extends StatefulWidget {
 }
 
 class _UserLoginPageState extends State<UserLoginPage> {
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   // User? _loggedInUser;
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
@@ -38,16 +39,22 @@ class _UserLoginPageState extends State<UserLoginPage> {
       final password = _passwordController.text.trim();
 
       try {
-        final userCredential =
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-
-        final user = userCredential.user;
+        var user;
+        try {
+          final userCredential =
+              await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+          user = userCredential.user;
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Invalid email or password")));
+          print(e.toString());
+        }
         final uid = user!.uid;
-        if (user != null) {
-          final loggedInUserModel =
+        if (user != "") {
+          var loggedInUserModel =
               Provider.of<LoggedInUserModel>(context, listen: false);
           loggedInUserModel.setLoggedInUser(
             AppUser(
@@ -64,10 +71,11 @@ class _UserLoginPageState extends State<UserLoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Log in successful"),
         ));
+
         Navigator.pushNamed(context, 'activityHome');
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Invalid credentials"),
+          content: Text("Log in failed"),
         ));
         print(e.toString());
       }
