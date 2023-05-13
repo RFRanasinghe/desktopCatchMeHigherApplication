@@ -276,8 +276,10 @@ class _CountFourActivityState extends State<CountFourActivity> {
 
     try {
       final docRef = FirebaseFirestore.instance
-          .collection('students')
+          .collection('scores')
           .where('uid', isEqualTo: uid)
+          .where('date',
+              isEqualTo: DateTime.now().toIso8601String().substring(0, 10))
           .limit(1)
           .get();
 
@@ -287,12 +289,19 @@ class _CountFourActivityState extends State<CountFourActivity> {
         final doc = snapshot.docs.first;
         final data = doc.data();
 
-        if (data.containsKey('countSelectionMarks')) {
-          final currentMarks = data['countSelectionMarks'] as int;
-          await doc.reference.update({'countSelectionMarks': currentMarks + 1});
+        if (data.containsKey('countingNumbersMarks')) {
+          final currentMarks = data['countingNumbersMarks'] as int;
+          await doc.reference
+              .update({'countingNumbersMarks': currentMarks + 1});
         } else {
-          await doc.reference.update({'countSelectionMarks': 1});
+          await doc.reference.update({'countingNumbersMarks': 1});
         }
+      } else {
+        await FirebaseFirestore.instance.collection('scores').add({
+          'uid': uid,
+          'countingNumbersMarks': 1,
+          'date': DateTime.now().toIso8601String().substring(0, 10),
+        });
       }
     } catch (error) {
       print('Error updating marks: $error');
