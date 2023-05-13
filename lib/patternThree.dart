@@ -275,8 +275,10 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
 
     try {
       final docRef = FirebaseFirestore.instance
-          .collection('students')
+          .collection('scores')
           .where('uid', isEqualTo: uid)
+          .where('date',
+              isEqualTo: DateTime.now().toIso8601String().substring(0, 10))
           .limit(1)
           .get();
 
@@ -293,9 +295,15 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
         } else {
           await doc.reference.update({'patternRecognitionMarks': 1});
         }
+      } else {
+        await FirebaseFirestore.instance.collection('scores').add({
+          'uid': uid,
+          'countingNumbersMarks': 1,
+          'date': DateTime.now().toIso8601String().substring(0, 10),
+        });
       }
     } catch (error) {
-      print('Eror updating marks: $error');
+      print('Error updating marks: $error');
     }
 
     Future.delayed(Duration(seconds: 2)).then((value) => {
