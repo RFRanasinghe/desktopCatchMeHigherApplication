@@ -96,6 +96,7 @@ flutter:
     - images/fish.jpg
     - images/dear.png
     - images/pig.png
+    - images/login.png
     - videos/
     - audio/
   # An image asset can refer to one or more resolution-specific "variants", see

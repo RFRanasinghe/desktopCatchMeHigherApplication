@@ -90,59 +90,102 @@ class _UserLoginPageState extends State<UserLoginPage> {
           child: Text("Log In Page"),
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (_errorMessage.isNotEmpty)
-                    Text(
-                      _errorMessage,
-                      style: TextStyle(color: Colors.red),
-                      textAlign: TextAlign.center,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            height: 650.0,
+            color: Color.fromARGB(255, 169, 196, 241),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 60.0, right: 60.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      height: 200.0,
+                      width: 200.0,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Image.asset('images/login.png'),
+                      ),
                     ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
+                    if (_errorMessage.isNotEmpty)
+                      Text(
+                        _errorMessage,
+                        style: TextStyle(color: Colors.red),
+                        textAlign: TextAlign.center,
+                      ),
+                    SizedBox(
+                      height: 40.0,
+                    ),
+                    TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
                         labelText: "Email Address",
-                        border: OutlineInputBorder(),
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please enter your Email";
                         }
                         return null;
-                      }),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  TextFormField(
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        border: OutlineInputBorder(),
+                      },
+                    ),
+                    SizedBox(
+                      height: 40.0,
+                    ),
+                    TextFormField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          labelText: "Password",
+                          labelStyle: TextStyle(
+                            color: Colors.black,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter your password";
+                          }
+                        }),
+                    SizedBox(
+                      height: 60.0,
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: _submit,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.amber,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Please enter your password";
-                        }
-                      }),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  ElevatedButton(
-                    onPressed: _submit,
-                    child: Text("Log In"),
-                  ),
-                ],
+                      icon: Icon(Icons.login_outlined),
+                      label: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "Log In",
+                          style: TextStyle(
+                            fontSize: 30.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                    // ElevatedButton(
+                    //   onPressed: _submit,
+                    //   child: Text("Log In"),
+                    // ),
+                  ],
+                ),
               ),
             ),
           ),
