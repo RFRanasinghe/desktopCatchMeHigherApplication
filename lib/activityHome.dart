@@ -79,7 +79,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.only(top: 50.0),
                     child: SizedBox(
                       width: 400,
                       child: new ElevatedButton(
@@ -89,6 +89,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                             "Color Selection",
                             style: TextStyle(
                               fontSize: 30,
+                              fontStyle: FontStyle.italic,
                             ),
                           ),
                         ),
@@ -104,7 +105,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(60.0),
                     child: SizedBox(
                       width: 400,
                       child: new ElevatedButton(
@@ -114,6 +115,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                             "Color Filling",
                             style: TextStyle(
                               fontSize: 30,
+                              fontStyle: FontStyle.italic,
                             ),
                           ),
                         ),
@@ -129,7 +131,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(30.0),
                     child: SizedBox(
                       width: 400,
                       child: new ElevatedButton(
@@ -139,6 +141,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                             "Counting Numbers",
                             style: TextStyle(
                               fontSize: 30,
+                              fontStyle: FontStyle.italic,
                             ),
                           ),
                         ),
@@ -154,7 +157,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(30.0),
                     child: SizedBox(
                       width: 400,
                       child: new ElevatedButton(
@@ -164,6 +167,7 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                             "Pattern Recognition",
                             style: TextStyle(
                               fontSize: 30,
+                              fontStyle: FontStyle.italic,
                             ),
                           ),
                         ),
@@ -186,8 +190,19 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       ),
-                      child: Text("Log Out"),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          "Log Out",
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Consumer<LoggedInUserModel>(

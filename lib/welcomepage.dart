@@ -80,6 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             "Existing Profile",
                             style: TextStyle(
                               fontSize: 30,
+                              //fontStyle: FontStyle.italic,
                             ),
                           ),
                         ),
@@ -106,6 +107,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           "Admin",
                           style: TextStyle(
                             fontSize: 30,
+                            fontStyle: FontStyle.italic,
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
