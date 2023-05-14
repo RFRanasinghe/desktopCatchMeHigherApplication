@@ -30,17 +30,24 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Column(
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(160.0),
+                    padding:
+                        const EdgeInsets.only(top: 180.0, left: 80, right: 80),
                     child: SizedBox(
                       width: 400,
-                      child: ElevatedButton(
+                      child: ElevatedButton.icon(
                         onPressed: () {
                           Navigator.pushNamed(context, 'newprofile');
                         },
-                        child: Padding(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        icon: Icon(Icons.app_registration_sharp),
+                        label: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Text(
                             "Create Profile",
@@ -50,17 +57,43 @@ class _WelcomePageState extends State<WelcomePage> {
                           ),
                         ),
                       ),
+                      // child: ElevatedButton(
+                      //   onPressed: () {
+                      //     Navigator.pushNamed(context, 'newprofile');
+                      //   },
+                      //   style: ElevatedButton.styleFrom(
+                      //     shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(15.0),
+                      //     ),
+                      //   ),
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(20.0),
+                      //     child: Text(
+                      //       "Create Profile",
+                      //       style: TextStyle(
+                      //         fontSize: 30,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(160.0),
+                    padding:
+                        const EdgeInsets.only(top: 180.0, left: 80, right: 80),
                     child: SizedBox(
                       width: 400,
-                      child: ElevatedButton(
+                      child: ElevatedButton.icon(
                         onPressed: () {
                           Navigator.pushNamed(context, 'userlogin');
                         },
-                        child: Padding(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                        ),
+                        icon: Icon(Icons.login),
+                        label: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Text(
                             "Existing Profile",
@@ -74,28 +107,36 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ElevatedButton.icon(
-                    icon: Icon(Icons.local_activity_sharp),
-                    onPressed: () {
-                      Navigator.pushNamed(context, 'admin');
-                    },
-                    label: Text(
-                      "Admin",
-                      style: TextStyle(
-                        fontSize: 30,
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 160.0, left: 200, right: 200.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 300,
+                      height: 80,
+                      child: ElevatedButton.icon(
+                        icon: Icon(Icons.local_activity_sharp),
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'admin');
+                        },
+                        label: Text(
+                          "Admin",
+                          style: TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
