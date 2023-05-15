@@ -128,12 +128,14 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
                           ),
                         ),
                         ElevatedButton.icon(
-                          icon: Icon(Icons.select_all_sharp),
-                          onPressed: () async {},
+                          icon: Icon(Icons.try_sms_star_sharp),
+                          onPressed: () async {
+                            resetScoreAgain();
+                          },
                           label: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              "Click Me",
+                              "Try again",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontStyle: FontStyle.italic,
@@ -146,7 +148,13 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
                         ),
                         ElevatedButton.icon(
                           icon: Icon(Icons.stop_sharp),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ActivityHomePage()),
+                            );
+                          },
                           label: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
@@ -177,7 +185,7 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Color.fromARGB(255, 27, 88, 0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0)),
                       ),
@@ -193,10 +201,12 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        handleCorrectButtonPress();
+                        setState(() {
+                          incorrectAnswer = true;
+                        });
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Color.fromARGB(255, 250, 91, 144),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
@@ -204,7 +214,7 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "Blue",
+                          "Pink",
                           style: TextStyle(
                             fontSize: 30,
                           ),
@@ -213,12 +223,10 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          incorrectAnswer = true;
-                        });
+                        handleCorrectButtonPress();
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow,
+                        backgroundColor: Color.fromARGB(255, 103, 74, 30),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
@@ -226,7 +234,7 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "Yellow",
+                          "Brown",
                           style: TextStyle(
                             fontSize: 30,
                           ),
@@ -346,5 +354,44 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
           }),
           Navigator.pushNamed(context, 'selectionTwo'),
         });
+  }
+
+  Future<void> resetScoreAgain() async {
+    final uid = Provider.of<LoggedInUserModel>(context, listen: false)
+        .loggedInUser!
+        .uid;
+
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('scores')
+          .where('uid', isEqualTo: uid)
+          .where('date',
+              isEqualTo: DateTime.now().toIso8601String().substring(0, 10))
+          .limit(1)
+          .get();
+
+      final snapshot = await docRef;
+
+      if (snapshot.docs.isNotEmpty) {
+        final doc = snapshot.docs.first;
+        final data = doc.data();
+
+        if (data.containsKey('colorSelectionMarks')) {
+          final currentMarks = data['colorSelectionMarks'] as int;
+          await doc.reference.update({'colorSelectionMarks': 0});
+        } else {
+          await doc.reference.update({'colorSelectionMarks': 0});
+        }
+      } else {
+        await FirebaseFirestore.instance.collection('scores').add({
+          'uid': uid,
+          'colorSelectionMarks': 0,
+          'date': DateTime.now().toIso8601String().substring(0, 10),
+        });
+      }
+      Navigator.pushNamed(context, 'colorSelection');
+    } catch (error) {
+      print('Error updating marks: $error');
+    }
   }
 }

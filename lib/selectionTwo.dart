@@ -18,6 +18,7 @@ class SelectionActivityTwoPage extends StatefulWidget {
 }
 
 class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
+  
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   var correctAnswer = false;
