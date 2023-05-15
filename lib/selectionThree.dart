@@ -1,5 +1,7 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desktopcatchmehigher/activityHome.dart';
+import 'package:desktopcatchmehigher/selectionFour.dart';
 import 'package:desktopcatchmehigher/selectionTwo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,22 @@ class _SelectionActivityThreePageState
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   var correctAnswer = false;
   var incorrectAnswer = false;
+
+  late AudioPlayer audioPlayer;
+  String audioUrl = 'audio/color_of_animal.mp3';
+
+  @override
+  void initState() {
+    super.initState();
+    audioPlayer = AudioPlayer();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final loggedIn = Provider.of<LoggedInUserModel>(context);
@@ -72,12 +90,12 @@ class _SelectionActivityThreePageState
                 ),
               ),
               Positioned(
-                top: 100.0,
+                top: 150.0,
                 left: 200.0,
                 child: Image.asset(
                   'images/sea.jpeg',
-                  height: 400.0,
-                  width: 400.0,
+                  height: 350.0,
+                  width: 350.0,
                 ),
               ),
               Padding(
@@ -94,20 +112,23 @@ class _SelectionActivityThreePageState
                           ),
                         ),
                         ElevatedButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.select_all_sharp),
+                          icon: Icon(Icons.speaker),
+                          onPressed: () async {
+                            await audioPlayer.setSourceUrl(audioUrl);
+                            await audioPlayer.resume();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 160, 97, 2),
+                          ),
                           label: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              "Click Me",
+                              "Listen to the question",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontStyle: FontStyle.italic,
                               ),
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 160, 97, 2),
                           ),
                         ),
                         ElevatedButton.icon(
@@ -274,7 +295,13 @@ class _SelectionActivityThreePageState
                 padding: const EdgeInsets.only(
                     top: 300.0, left: 1350.0, right: 30.0),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ColourSelectionFour()),
+                    );
+                  },
                   child: Image.asset(
                     'images/right.jpg',
                     width: 100.0,

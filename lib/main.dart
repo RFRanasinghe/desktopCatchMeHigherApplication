@@ -14,6 +14,7 @@ import 'package:desktopcatchmehigher/patternFour.dart';
 import 'package:desktopcatchmehigher/patternRecognition.dart';
 import 'package:desktopcatchmehigher/patternThree.dart';
 import 'package:desktopcatchmehigher/patternTwo.dart';
+import 'package:desktopcatchmehigher/selectionFour.dart';
 import 'package:desktopcatchmehigher/selectionThree.dart';
 import 'package:desktopcatchmehigher/selectionTwo.dart';
 import 'package:desktopcatchmehigher/userlogin.dart';
@@ -61,6 +62,7 @@ Future main() async {
           'colorSelection': (context) => ColorSelection(),
           'selectionTwo': (context) => SelectionActivityTwoPage(),
           'selectionThree': (context) => SelectionActivityThreePage(),
+          'selectionFour': (context) => ColourSelectionFour(),
           'colorFilling': (context) => ColorFillingPage(),
           'countingNum': (context) => CountingNumbers(),
           'countTwo': (context) => CountTwoActivity(),

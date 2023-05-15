@@ -17,9 +17,26 @@ class ColorSelection extends StatefulWidget {
 }
 
 class _ColorSelectionState extends State<ColorSelection> {
+
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+  
   var correctAnswer = false;
   var incorrectAnswer = false;
+
+  late AudioPlayer audioPlayer;
+  String audioUrl = 'audio/colour_of_car.mp3';
+
+  @override
+  void initState() {
+    super.initState();
+    audioPlayer = AudioPlayer();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +87,12 @@ class _ColorSelectionState extends State<ColorSelection> {
                 ),
               ),
               Positioned(
-                top: 100,
+                top: 150,
                 left: 200,
                 child: Image.asset(
                   'images/car.jpeg',
-                  height: 400,
-                  width: 400,
+                  height: 350,
+                  width: 350,
                 ),
               ),
               Padding(
@@ -92,11 +109,28 @@ class _ColorSelectionState extends State<ColorSelection> {
                           ),
                         ),
                         ElevatedButton.icon(
-                          icon: Icon(Icons.select_all_sharp),
+                          icon: Icon(Icons.speaker),
                           onPressed: () async {
-                            // AudioPlayer p = new AudioPlayer();
-                            // await p.play(AssetSource('audio/test.mp3'));
+                            await audioPlayer.setSourceUrl(audioUrl);
+                            await audioPlayer.resume();
                           },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 3, 22, 130),
+                          ),
+                          label: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Listen to the question",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          icon: Icon(Icons.select_all_sharp),
+                          onPressed: () async {},
                           label: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(

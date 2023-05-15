@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desktopcatchmehigher/activityHome.dart';
 import 'package:desktopcatchmehigher/colorSelection.dart';
@@ -17,12 +18,26 @@ class SelectionActivityTwoPage extends StatefulWidget {
 }
 
 class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
-
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   var correctAnswer = false;
   var incorrectAnswer = false;
-  
+
+  late AudioPlayer audioPlayer;
+  String audioUrl = 'colour_of_pencil.mp3';
+
+  @override
+  void initState() {
+    super.initState();
+    audioPlayer = AudioPlayer();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final loggedIn = Provider.of<LoggedInUserModel>(context);
@@ -75,12 +90,12 @@ class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
                 ),
               ),
               Positioned(
-                top: 100.0,
+                top: 150.0,
                 left: 200.0,
                 child: Image.asset(
                   'images/pencil.png',
-                  height: 400.0,
-                  width: 400.0,
+                  height: 350.0,
+                  width: 350.0,
                 ),
               ),
               Padding(
@@ -97,20 +112,23 @@ class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
                           ),
                         ),
                         ElevatedButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.select_all_sharp),
+                          onPressed: () async {
+                            await audioPlayer.setSourceUrl(audioUrl);
+                            await audioPlayer.resume();
+                          },
+                          icon: Icon(Icons.speaker),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 160, 97, 2),
+                          ),
                           label: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              "Click Me",
+                              "Listen to the question",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontStyle: FontStyle.italic,
                               ),
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 160, 97, 2),
                           ),
                         ),
                         ElevatedButton.icon(
