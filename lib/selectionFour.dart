@@ -352,7 +352,7 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
           setState(() {
             correctAnswer = false;
           }),
-          Navigator.pushNamed(context, 'selectionTwo'),
+          Navigator.pushNamed(context, 'activityHome'),
         });
   }
 

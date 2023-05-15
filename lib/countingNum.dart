@@ -309,7 +309,7 @@ class _CountingNumbersState extends State<CountingNumbers> {
     }
   }
 
-  Future<void> handleCorrectButtonPress() async {
+   Future<void> handleCorrectButtonPress() async {
     setState(() {
       correctAnswer = true;
     });

@@ -16,7 +16,6 @@ class CountTwoActivity extends StatefulWidget {
 }
 
 class _CountTwoActivityState extends State<CountTwoActivity> {
-
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   var correctAnswer = false;
@@ -39,7 +38,6 @@ class _CountTwoActivityState extends State<CountTwoActivity> {
 
   @override
   Widget build(BuildContext context) {
-
     final loggedIn = Provider.of<LoggedInUserModel>(context);
     if (loggedIn.loggedInUser == null || loggedIn.loggedInUser!.uid!.isEmpty) {
       if (!_navigatorKey.currentState!.userGestureInProgress) {

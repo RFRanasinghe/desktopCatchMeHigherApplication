@@ -350,7 +350,7 @@ class _PatternRecognitionState extends State<PatternRecognition> {
       } else {
         await FirebaseFirestore.instance.collection('scores').add({
           'uid': uid,
-          'countingNumbersMarks': 1,
+          'patternRecognitionMarks': 1,
           'date': DateTime.now().toIso8601String().substring(0, 10),
         });
       }
