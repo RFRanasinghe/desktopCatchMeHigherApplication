@@ -22,7 +22,7 @@ class _CountThreeActivityState extends State<CountThreeActivity> {
   var incorrectAnswer = false;
 
   late AudioPlayer audioPlayer;
-  String audioUrl = 'donuts.mp3';
+  String audioUrl = 'audio/donuts.mp3';
 
   @override
   void initState() {
@@ -81,18 +81,21 @@ class _CountThreeActivityState extends State<CountThreeActivity> {
               ),
               Visibility(
                 visible: incorrectAnswer,
-                child: Image.asset(
-                  'videos/wrong.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100.0, left: 60),
+                  child: Image.asset(
+                    'videos/wrong.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Positioned(
-                top: 80,
+                top: 120,
                 left: 600,
                 child: Image.asset(
                   'images/donut.jpg',
-                  height: 400,
+                  height: 370,
                   width: 400,
                 ),
               ),

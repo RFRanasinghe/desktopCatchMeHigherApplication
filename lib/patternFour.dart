@@ -22,7 +22,7 @@ class _PatternFourPageState extends State<PatternFourPage> {
   var incorrectAnswer = false;
 
   late AudioPlayer audioPlayer;
-  String audioUrl = 'pattern.mp3';
+  String audioUrl = 'audio/pattern.mp3';
 
   @override
   void initState() {
@@ -81,18 +81,21 @@ class _PatternFourPageState extends State<PatternFourPage> {
               ),
               Visibility(
                   visible: incorrectAnswer,
-                  child: Image.asset(
-                    'videos/wrong.gif',
-                    height: 200.0,
-                    width: 200.0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 100.0, left: 60),
+                    child: Image.asset(
+                      'videos/wrong.gif',
+                      height: 200.0,
+                      width: 200.0,
+                    ),
                   )),
               Positioned(
-                top: 90,
+                top: 140,
                 left: 600,
                 child: Image.asset(
-                  'images/pq4.jpg',
-                  height: 400,
-                  width: 400,
+                  'images/pattern4.png',
+                  height: 350,
+                  width: 350,
                 ),
               ),
               Padding(
@@ -180,7 +183,11 @@ class _PatternFourPageState extends State<PatternFourPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          incorrectAnswer = true;
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 1, 34, 61),
                         shape: RoundedRectangleBorder(
@@ -189,7 +196,7 @@ class _PatternFourPageState extends State<PatternFourPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "A",
+                          "a",
                           style: TextStyle(
                             fontSize: 30,
                           ),
@@ -197,7 +204,11 @@ class _PatternFourPageState extends State<PatternFourPage> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          incorrectAnswer = true;
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 183, 4, 4),
                         shape: RoundedRectangleBorder(
@@ -206,7 +217,7 @@ class _PatternFourPageState extends State<PatternFourPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "B",
+                          "b",
                           style: TextStyle(
                             fontSize: 30,
                           ),
@@ -214,7 +225,11 @@ class _PatternFourPageState extends State<PatternFourPage> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          incorrectAnswer = true;
+                        });
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 245, 223, 115),
                         shape: RoundedRectangleBorder(
@@ -231,7 +246,9 @@ class _PatternFourPageState extends State<PatternFourPage> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        handleCorrectButtonPress();
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 136, 193, 240),
                         shape: RoundedRectangleBorder(
@@ -240,7 +257,7 @@ class _PatternFourPageState extends State<PatternFourPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "D",
+                          "d",
                           style: TextStyle(
                             fontSize: 30,
                           ),
@@ -275,7 +292,8 @@ class _PatternFourPageState extends State<PatternFourPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ExistingProfile()),
+                        builder: (context) => ActivityHomePage(),
+                      ),
                     );
                   },
                   child: Image.asset(
@@ -317,7 +335,8 @@ class _PatternFourPageState extends State<PatternFourPage> {
 
         if (data.containsKey('patternRecognitionMarks')) {
           final currentMarks = data['patternRecognitionMarks'] as int;
-          await doc.reference.update({'patternRecognitionMarks': currentMarks + 1});
+          await doc.reference
+              .update({'patternRecognitionMarks': currentMarks + 1});
         } else {
           await doc.reference.update({'patternRecognitionMarks': 1});
         }

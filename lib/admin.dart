@@ -155,80 +155,104 @@ class _AdminMonitorPageState extends State<AdminMonitorPage> {
               ],
             ),
           ),
-          Expanded(child: Text('User details will be displayed below')),
           Expanded(
-            child: ListView.builder(
-              itemCount: filteredUsers.length,
-              itemBuilder: (context, index) {
-                return DataTable(
-                  columnSpacing: 20.0,
-                  columns: [
-                    DataColumn(label: Text('Title')),
-                    DataColumn(label: Text('Value')),
-                  ],
-                  rows: [
-                    DataRow(cells: [
-                      DataCell(Text('Name')),
-                      DataCell(Text(filteredUsers[index]['name'])),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Email')),
-                      DataCell(Text(filteredUsers[index]['email'])),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('ID Number')),
-                      DataCell(Text(filteredUsers[index]['idnumber'])),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('Condition')),
-                      DataCell(Text(filteredUsers[index]['condition'])),
-                    ]),
-                  ],
-                );
-              },
+              child: Padding(
+            padding: const EdgeInsets.only(top: 40.0, left: 20.0),
+            child: Text(
+              'User details will be displayed below',
+              style: TextStyle(
+                fontSize: 20.0,
+              ),
+            ),
+          )),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20.0, bottom: 40.0),
+              child: ListView.builder(
+                itemCount: filteredUsers.length,
+                itemBuilder: (context, index) {
+                  return DataTable(
+                    columnSpacing: 20.0,
+                    columns: [
+                      DataColumn(label: Text('Title')),
+                      DataColumn(label: Text('Value')),
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(Text('Name')),
+                        DataCell(Text(filteredUsers[index]['name'])),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('Email')),
+                        DataCell(Text(filteredUsers[index]['email'])),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('ID Number')),
+                        DataCell(Text(filteredUsers[index]['idnumber'])),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text('Condition')),
+                        DataCell(Text(filteredUsers[index]['condition'])),
+                      ]),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
-          Expanded(child: Text('Scores will be displayed below')),
           Expanded(
-            child: ListView.builder(
-              itemCount: filteredUsers.length,
-              itemBuilder: (context, index) {
-                List<Map<String, dynamic>> scores =
-                    filteredUsers[index]['scores'];
-                int scoresLength = scores.length;
-                return DataTable(
-                  columnSpacing: 20.0,
-                  columns: [
-                    DataColumn(label: Text('Date')),
-                    DataColumn(label: Text('Couting Number Marks')),
-                    DataColumn(label: Text('Color Selection Marks')),
-                    DataColumn(label: Text('Pattern Recognition Marks')),
-                    DataColumn(label: Text('Color Filling Marks')),
-                  ],
-                  rows: List<DataRow>.generate(scoresLength, (rowIndex) {
-                    return DataRow(cells: [
-                      DataCell(Text(scores[rowIndex]['date'] ?? 'N/A')),
-                      DataCell(Text(scores[rowIndex]['countingNumberMarks'] !=
-                              null
-                          ? scores[rowIndex]['countingNumberMarks'].toString()
-                          : 'N/A')),
-                      DataCell(Text(scores[rowIndex]['colorSelectionMarks'] !=
-                              null
-                          ? scores[rowIndex]['colorSelectionMarks'].toString()
-                          : 'N/A')),
-                      DataCell(Text(
-                          scores[rowIndex]['patternRecognitionMarks'] != null
-                              ? scores[rowIndex]['patternRecognitionMarks']
-                                  .toString()
-                              : 'N/A')),
-                      DataCell(Text(
-                          scores[rowIndex]['colorFillingMarks'] != null
-                              ? scores[rowIndex]['colorFillingMarks'].toString()
-                              : 'N/A')),
-                    ]);
-                  }),
-                );
-              },
+              child: Padding(
+            padding: const EdgeInsets.only(left: 20.0, top: 40.0),
+            child: Text(
+              'Scores will be displayed below',
+              style: TextStyle(
+                fontSize: 20.0,
+              ),
+            ),
+          )),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20.0, bottom: 40.0),
+              child: ListView.builder(
+                itemCount: filteredUsers.length,
+                itemBuilder: (context, index) {
+                  List<Map<String, dynamic>> scores =
+                      filteredUsers[index]['scores'];
+                  int scoresLength = scores.length;
+                  return DataTable(
+                    columnSpacing: 20.0,
+                    columns: [
+                      DataColumn(label: Text('Date')),
+                      DataColumn(label: Text('Couting Number Marks')),
+                      DataColumn(label: Text('Color Selection Marks')),
+                      DataColumn(label: Text('Pattern Recognition Marks')),
+                      DataColumn(label: Text('Color Filling Marks')),
+                    ],
+                    rows: List<DataRow>.generate(scoresLength, (rowIndex) {
+                      return DataRow(cells: [
+                        DataCell(Text(scores[rowIndex]['date'] ?? 'N/A')),
+                        DataCell(Text(scores[rowIndex]['countingNumberMarks'] !=
+                                null
+                            ? scores[rowIndex]['countingNumberMarks'].toString()
+                            : 'N/A')),
+                        DataCell(Text(scores[rowIndex]['colorSelectionMarks'] !=
+                                null
+                            ? scores[rowIndex]['colorSelectionMarks'].toString()
+                            : 'N/A')),
+                        DataCell(Text(
+                            scores[rowIndex]['patternRecognitionMarks'] != null
+                                ? scores[rowIndex]['patternRecognitionMarks']
+                                    .toString()
+                                : 'N/A')),
+                        DataCell(Text(scores[rowIndex]['colorFillingMarks'] !=
+                                null
+                            ? scores[rowIndex]['colorFillingMarks'].toString()
+                            : 'N/A')),
+                      ]);
+                    }),
+                  );
+                },
+              ),
             ),
           ),
         ],

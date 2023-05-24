@@ -1,7 +1,13 @@
+import 'package:audioplayers/audioplayers.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desktopcatchmehigher/activityHome.dart';
+import 'package:desktopcatchmehigher/colorfillThree.dart';
 import 'package:desktopcatchmehigher/fillingTwo.dart';
 import 'package:desktopcatchmehigher/widget/fillingThree.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'logged_in_user_model.dart';
 
 class ColorFillingFourthPage extends StatefulWidget {
   const ColorFillingFourthPage({Key? key}) : super(key: key);
@@ -11,180 +17,378 @@ class ColorFillingFourthPage extends StatefulWidget {
 }
 
 class _ColorFillingFourthPageState extends State<ColorFillingFourthPage> {
-  // List<ItemModel> items;
-  // List<ItemModel> items2;
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
-  // int score;
-  // bool gameOver;
+  var correctAnswer = false;
+  var incorrectAnswer = false;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   initGame();
-  // }
-
-  // initGame() {
-  //   gameOver = false;
-  //   score = 0;
-  // }
+  late AudioPlayer audioPlayer;
+  String audioUrl = 'audio/skin.mp3';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Center(
-          child: Text("Color Filling Activity - Page 4"),
-        ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/screen.jpeg'),
-            fit: BoxFit.cover,
+    final loggedIn = Provider.of<LoggedInUserModel>(context);
+    if (loggedIn.loggedInUser == null || loggedIn.loggedInUser!.uid!.isEmpty) {
+      if (!_navigatorKey.currentState!.userGestureInProgress) {
+        Navigator.pushNamed(context, 'userlogin');
+        return Container();
+      }
+      return Container();
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text("Color Filling Activity"),
           ),
         ),
-        child: Stack(
-          children: [
-            Container(
-              color: Colors.white,
-              width: double.infinity,
-              height: double.infinity,
-              margin: EdgeInsets.only(
-                  top: 50.0, left: 80.0, bottom: 70, right: 80.0),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/screen.jpeg'),
+              fit: BoxFit.cover,
             ),
-            Positioned(
-              top: 100,
-              left: 200,
-              child: Image.asset(
-                'images/pig.png',
-                height: 400,
-                width: 400,
+          ),
+          child: Stack(
+            children: [
+              Container(
+                color: Colors.white,
+                width: double.infinity,
+                height: double.infinity,
+                margin: EdgeInsets.only(
+                    top: 50.0, left: 80.0, bottom: 70, right: 80.0),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 80.0, left: 100.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text(
-                        "Select the color of this dear?",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: Icon(Icons.select_all_sharp),
-                        label: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "Click Me",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 160, 97, 2),
-                        ),
-                      ),
-                      ElevatedButton.icon(
-                        icon: Icon(Icons.try_sms_star_sharp),
-                        onPressed: () {},
-                        label: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "Try Again",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 1, 37, 66),
-                        ),
-                      ),
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: Icon(Icons.stop_sharp),
-                        label: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "FINISH",
-                            style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 2, 66, 27),
-                        ),
-                      ),
-                    ],
+              Visibility(
+                visible: correctAnswer,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 450.0, left: 400.0),
+                  child: Image.asset(
+                    'videos/wonFree.gif',
+                    height: 200.0,
+                    width: 200.0,
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(60),
-              // child: Column(
-              //   children: <Widget>[
-              //     Text.rich(TextSpan(
-              //       children: [
-              //         TextSpan(text: "Score: "),
-              //         TextSpan(
-              //             text: "$score",
-              //             style: TextStyle(
-              //               color: Colors.green,
-              //               fontWeight: FontWeight.bold,
-              //               fontSize: 30,
-              //             )),
-              //       ],
-              //     ))
-              //   ],
-              // ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 300.0, left: 80.0),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ColorFillingThirdPage()),
-                  );
-                },
-                child: Image.asset(
-                  'images/left.jpg',
-                  width: 100.0,
-                  height: 100.0,
                 ),
               ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 300.0, left: 1350.0, right: 30.0),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ActivityHomePage()),
-                  );
-                },
-                child: Image.asset(
-                  'images/right.jpg',
-                  width: 100.0,
-                  height: 100.0,
+              Visibility(
+                visible: incorrectAnswer,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100.0, left: 60),
+                  child: Image.asset(
+                    'videos/wrong.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                top: 100,
+                left: 600,
+                child: Image.asset(
+                  'images/cf_fox.png',
+                  height: 400,
+                  width: 400,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 80.0, left: 100.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Text(
+                          "Select the skin color of this animal?",
+                          style: TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          onPressed: () async {
+                            await audioPlayer.setSourceUrl(audioUrl);
+                            await audioPlayer.resume();
+                          },
+                          icon: Icon(Icons.speaker),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 160, 97, 2),
+                          ),
+                          label: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Listen to the question",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          icon: Icon(Icons.try_sms_star_sharp),
+                          onPressed: () {
+                            resetScoreAgain();
+                          },
+                          label: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Try Again",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 1, 37, 66),
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ActivityHomePage()),
+                            );
+                          },
+                          icon: Icon(Icons.stop_sharp),
+                          label: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "FINISH",
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 2, 66, 27),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 530.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          incorrectAnswer = true;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 1, 88, 4),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          "Green",
+                          style: TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        handleCorrectButtonPress();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 255, 146, 211),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          "Pink",
+                          style: TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          incorrectAnswer = true;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 10, 60, 101),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          "Blue",
+                          style: TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          incorrectAnswer = true;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          "Red",
+                          style: TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(60),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 300.0, left: 80.0),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FillColorThreePage()),
+                    );
+                  },
+                  child: Image.asset(
+                    'images/left.jpg',
+                    width: 100.0,
+                    height: 100.0,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 300.0, left: 1350.0, right: 30.0),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ActivityHomePage()),
+                    );
+                  },
+                  child: Image.asset(
+                    'images/right.jpg',
+                    width: 100.0,
+                    height: 100.0,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
+  }
+
+  Future<void> handleCorrectButtonPress() async {
+    setState(() {
+      correctAnswer = true;
+    });
+    final uid = Provider.of<LoggedInUserModel>(context, listen: false)
+        .loggedInUser!
+        .uid;
+
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('scores')
+          .where('uid', isEqualTo: uid)
+          .where('date',
+              isEqualTo: DateTime.now().toIso8601String().substring(0, 10))
+          .limit(1)
+          .get();
+
+      final snapshot = await docRef;
+
+      if (snapshot.docs.isNotEmpty) {
+        final doc = snapshot.docs.first;
+        final data = doc.data();
+
+        if (data.containsKey('colourFillingMarks')) {
+          final currentMarks = data['colourFillingMarks'] as int;
+          await doc.reference.update({'colourFillingMarks': currentMarks + 1});
+        } else {
+          await doc.reference.update({'colourFillingMarks': 1});
+        }
+      } else {
+        await FirebaseFirestore.instance.collection('scores').add({
+          'uid': uid,
+          'colourFillingMarks': 1,
+          'date': DateTime.now().toIso8601String().substring(0, 10),
+        });
+      }
+    } catch (error) {
+      print('Error updating marks: $error');
+    }
+
+    Future.delayed(Duration(seconds: 2)).then((value) => {
+          setState(() {
+            correctAnswer = false;
+          }),
+          Navigator.pushNamed(context, 'activityHome'),
+        });
+  }
+
+  Future<void> resetScoreAgain() async {
+    final uid = Provider.of<LoggedInUserModel>(context, listen: false)
+        .loggedInUser!
+        .uid;
+
+    try {
+      final docRef = FirebaseFirestore.instance
+          .collection('scores')
+          .where('uid', isEqualTo: uid)
+          .where('date',
+              isEqualTo: DateTime.now().toIso8601String().substring(0, 10))
+          .limit(1)
+          .get();
+
+      final snapshot = await docRef;
+
+      if (snapshot.docs.isNotEmpty) {
+        final doc = snapshot.docs.first;
+        final data = doc.data();
+
+        if (data.containsKey('colourFillingMarks')) {
+          final currentMarks = data['colourFillingMarks'] as int;
+          await doc.reference.update({'colourFillingMarks': 0});
+        } else {
+          await doc.reference.update({'colourFillingMarks': 0});
+        }
+      } else {
+        await FirebaseFirestore.instance.collection('scores').add({
+          'uid': uid,
+          'colourFillingMarks': 0,
+          'date': DateTime.now().toIso8601String().substring(0, 10),
+        });
+      }
+      Navigator.pushNamed(context, 'colorFilling');
+    } catch (error) {
+      print('Error updating marks: $error');
+    }
   }
 }

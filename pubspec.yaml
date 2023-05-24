@@ -76,9 +76,7 @@ flutter:
     - images/papertool.jpg
     - images/bLScreen.jpg
     - images/rainbow.jpg
-    - images/dog.png
     - images/actBg.jpg
-    - images/count.jpg
     - images/car.jpeg
     - images/screen.jpeg
     - images/left.jpg
@@ -91,13 +89,17 @@ flutter:
     - images/icecream.jpg
     - images/pq1.jpg
     - images/pq2.jpg
-    - images/pq3.jpg
+    #- images/pq3.jpg
     - images/pq4.jpg
-    - images/fish.jpg
     - images/dear.png
-    - images/pig.png
     - images/login.png
     - images/tintin.jpeg
+    - images/cfrabbit.png
+    - images/cf_fox.png
+    - images/cfcat.png
+    - images/cfdear.png
+    - images/pattern3.jpg
+    - images/pattern4.png
     - videos/
     - audio/
   # An image asset can refer to one or more resolution-specific "variants", see

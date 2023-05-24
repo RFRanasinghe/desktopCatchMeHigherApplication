@@ -73,7 +73,7 @@ class _SelectionActivityThreePageState
               Visibility(
                 visible: correctAnswer,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 450.0, left: 400.0),
+                  padding: const EdgeInsets.only(top: 450.0, left: 1030.0),
                   child: Image.asset(
                     'videos/wonFree.gif',
                     height: 200.0,
@@ -83,15 +83,18 @@ class _SelectionActivityThreePageState
               ),
               Visibility(
                 visible: incorrectAnswer,
-                child: Image.asset(
-                  'videos/wrong.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100.0, left: 60),
+                  child: Image.asset(
+                    'videos/wrong.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Positioned(
                 top: 150.0,
-                left: 200.0,
+                left: 600.0,
                 child: Image.asset(
                   'images/sea.jpeg',
                   height: 350.0,

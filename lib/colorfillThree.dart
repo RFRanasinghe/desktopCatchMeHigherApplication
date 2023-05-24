@@ -1,35 +1,28 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desktopcatchmehigher/activityHome.dart';
-import 'package:desktopcatchmehigher/patternTwo.dart';
+import 'package:desktopcatchmehigher/fillingFour.dart';
+import 'package:desktopcatchmehigher/fillingTwo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'logged_in_user_model.dart';
 
-class PatternRecognition extends StatefulWidget {
-  const PatternRecognition({Key? key}) : super(key: key);
+class FillColorThreePage extends StatefulWidget {
+  const FillColorThreePage({Key? key}) : super(key: key);
 
   @override
-  _PatternRecognitionState createState() => _PatternRecognitionState();
+  _FillColorThreePageState createState() => _FillColorThreePageState();
 }
 
-class _PatternRecognitionState extends State<PatternRecognition> {
+class _FillColorThreePageState extends State<FillColorThreePage> {
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   var correctAnswer = false;
   var incorrectAnswer = false;
 
-  int buttonSelected = -1;
-
-  void onButtonPressed(int indexButton) {
-    setState(() {
-      buttonSelected = indexButton;
-    });
-  }
-
   late AudioPlayer audioPlayer;
-  String audioUrl = 'audio/pattern.mp3';
+  String audioUrl = 'audio/tail.mp3';
 
   @override
   void initState() {
@@ -56,7 +49,7 @@ class _PatternRecognitionState extends State<PatternRecognition> {
       return Scaffold(
         appBar: AppBar(
           title: Center(
-            child: Text("Pattern Recognition Activity"),
+            child: Text("Color Filling Activity"),
           ),
         ),
         body: Container(
@@ -78,7 +71,7 @@ class _PatternRecognitionState extends State<PatternRecognition> {
               Visibility(
                 visible: correctAnswer,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 450.0, left: 400.0),
+                  padding: const EdgeInsets.only(top: 450.0, left: 60.0),
                   child: Image.asset(
                     'videos/wonFree.gif',
                     height: 200.0,
@@ -99,11 +92,11 @@ class _PatternRecognitionState extends State<PatternRecognition> {
               ),
               Positioned(
                 top: 80,
-                left: 550,
+                left: 600,
                 child: Image.asset(
-                  'images/pq1.jpg',
-                  height: 470,
-                  width: 470,
+                  'images/cfcat.png',
+                  height: 500,
+                  width: 500,
                 ),
               ),
               Padding(
@@ -114,7 +107,7 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Text(
-                          "Select the next correct pattern?",
+                          "What is the color of cats' tail?",
                           style: TextStyle(
                             fontSize: 30,
                           ),
@@ -124,7 +117,10 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                             await audioPlayer.setSourceUrl(audioUrl);
                             await audioPlayer.resume();
                           },
-                          icon: Icon(Icons.select_all_sharp),
+                          icon: Icon(Icons.speaker),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 160, 97, 2),
+                          ),
                           label: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
@@ -134,9 +130,6 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                                 fontStyle: FontStyle.italic,
                               ),
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 160, 97, 2),
                           ),
                         ),
                         ElevatedButton.icon(
@@ -186,47 +179,23 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 510.0),
+                padding: const EdgeInsets.only(top: 530.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     ElevatedButton(
                       onPressed: () {
-                        buttonSelected == 0 ? null : () => onButtonPressed(0);
-                        child:
-                        Text("Wrong Answer");
-                        setState(() {
-                          incorrectAnswer = true;
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 13, 58, 15),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(
-                          "a",
-                          style: TextStyle(
-                            fontSize: 30,
-                          ),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
                         handleCorrectButtonPress();
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 185, 198, 186),
+                        backgroundColor: Color.fromARGB(255, 250, 194, 99),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0)),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "b",
+                          "Orange",
                           style: TextStyle(
                             fontSize: 30,
                           ),
@@ -240,14 +209,15 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 234, 169, 85),
+                        backgroundColor: Colors.pink,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "c",
+                          "Pink",
                           style: TextStyle(
                             fontSize: 30,
                           ),
@@ -261,14 +231,37 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 31, 7, 133),
+                        backgroundColor: Colors.brown,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "d",
+                          "Brown",
+                          style: TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          incorrectAnswer = true;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.purple,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          "Purple",
                           style: TextStyle(
                             fontSize: 30,
                           ),
@@ -285,7 +278,7 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ActivityHomePage()),
+                          builder: (context) => ColorFillingSecondPage()),
                     );
                   },
                   child: Image.asset(
@@ -303,7 +296,7 @@ class _PatternRecognitionState extends State<PatternRecognition> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PatternTwoActivity()),
+                          builder: (context) => ColorFillingFourthPage()),
                     );
                   },
                   child: Image.asset(
@@ -343,17 +336,16 @@ class _PatternRecognitionState extends State<PatternRecognition> {
         final doc = snapshot.docs.first;
         final data = doc.data();
 
-        if (data.containsKey('patternRecognitionMarks')) {
-          final currentMarks = data['patternRecognitionMarks'] as int;
-          await doc.reference
-              .update({'patternRecognitionMarks': currentMarks + 1});
+        if (data.containsKey('colourFillingMarks')) {
+          final currentMarks = data['colourFillingMarks'] as int;
+          await doc.reference.update({'colourFillingMarks': currentMarks + 1});
         } else {
-          await doc.reference.update({'patternRecognitionMarks': 1});
+          await doc.reference.update({'colourFillingMarks': 1});
         }
       } else {
         await FirebaseFirestore.instance.collection('scores').add({
           'uid': uid,
-          'patternRecognitionMarks': 1,
+          'colourFillingMarks': 1,
           'date': DateTime.now().toIso8601String().substring(0, 10),
         });
       }
@@ -365,7 +357,7 @@ class _PatternRecognitionState extends State<PatternRecognition> {
           setState(() {
             correctAnswer = false;
           }),
-          Navigator.pushNamed(context, 'patternTwo'),
+          Navigator.pushNamed(context, 'fillingFour'),
         });
   }
 
@@ -389,20 +381,20 @@ class _PatternRecognitionState extends State<PatternRecognition> {
         final doc = snapshot.docs.first;
         final data = doc.data();
 
-        if (data.containsKey('patternRecognitionMarks')) {
-          final currentMarks = data['patternRecognitionMarks'] as int;
-          await doc.reference.update({'patternRecognitionMarks': 0});
+        if (data.containsKey('colourFillingMarks')) {
+          final currentMarks = data['colourFillingMarks'] as int;
+          await doc.reference.update({'colourFillingMarks': 0});
         } else {
-          await doc.reference.update({'patternRecognitionMarks': 0});
+          await doc.reference.update({'colourFillingMarks': 0});
         }
       } else {
         await FirebaseFirestore.instance.collection('scores').add({
           'uid': uid,
-          'patternRecognitionMarks': 0,
+          'colourFillingMarks': 0,
           'date': DateTime.now().toIso8601String().substring(0, 10),
         });
       }
-      Navigator.pushNamed(context, 'patternRecognition');
+      Navigator.pushNamed(context, 'colorFilling');
     } catch (error) {
       print('Error updating marks: $error');
     }

@@ -22,7 +22,7 @@ class _CountFourActivityState extends State<CountFourActivity> {
   var incorrectAnswer = false;
 
   late AudioPlayer audioPlayer;
-  String audioUrl = 'sweets.mp3';
+  String audioUrl = 'audio/sweets.mp3';
 
   @override
   void initState() {
@@ -81,19 +81,22 @@ class _CountFourActivityState extends State<CountFourActivity> {
               ),
               Visibility(
                 visible: incorrectAnswer,
-                child: Image.asset(
-                  'videos/wrong.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100.0, left: 60),
+                  child: Image.asset(
+                    'videos/wrong.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Positioned(
-                top: 80,
+                top: 120,
                 left: 600,
                 child: Image.asset(
                   'images/icecream.jpg',
-                  height: 400,
-                  width: 400,
+                  height: 370,
+                  width: 370,
                 ),
               ),
               Padding(
@@ -290,7 +293,7 @@ class _CountFourActivityState extends State<CountFourActivity> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ExistingProfile()),
+                          builder: (context) => ActivityHomePage()),
                     );
                   },
                   child: Image.asset(

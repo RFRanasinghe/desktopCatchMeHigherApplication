@@ -71,23 +71,29 @@ class _ColorSelectionFourState extends State<ColourSelectionFour> {
               ),
               Visibility(
                 visible: correctAnswer,
-                child: Image.asset(
-                  'videos/wonFree.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 450, left: 700.0),
+                  child: Image.asset(
+                    'videos/wonFree.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Visibility(
                 visible: incorrectAnswer,
-                child: Image.asset(
-                  'videos/wrong.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100.0, left: 60),
+                  child: Image.asset(
+                    'videos/wrong.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Positioned(
                 top: 150,
-                left: 200,
+                left: 600,
                 child: Image.asset(
                   'images/tintin.jpeg',
                   height: 350,

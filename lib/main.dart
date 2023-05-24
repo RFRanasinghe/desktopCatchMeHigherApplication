@@ -5,6 +5,7 @@ import 'package:desktopcatchmehigher/activityHome.dart';
 import 'package:desktopcatchmehigher/admin.dart';
 import 'package:desktopcatchmehigher/colorFilling.dart';
 import 'package:desktopcatchmehigher/colorSelection.dart';
+import 'package:desktopcatchmehigher/colorfillThree.dart';
 import 'package:desktopcatchmehigher/countFour.dart';
 import 'package:desktopcatchmehigher/countThree.dart';
 import 'package:desktopcatchmehigher/countTwo.dart';
@@ -75,6 +76,7 @@ Future main() async {
           'admin': (context) => AdminMonitorPage(),
           'fillingTwo': (context) => ColorFillingSecondPage(),
           'userlogin': (context) => UserLoginPage(),
+          'colorfillThree': (context) => FillColorThreePage(),
         },
       )));
 }

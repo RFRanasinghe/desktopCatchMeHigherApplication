@@ -207,9 +207,14 @@ class _ActivityHomePageState extends State<ActivityHomePage> {
                   ),
                   Consumer<LoggedInUserModel>(
                       builder: (context, loggedInUserModel, _) {
-                    return Text(loggedInUserModel.loggedInUser!.email! +
-                        " " +
-                        loggedInUserModel.loggedInUser!.uid!);
+                    return Text(
+                      loggedInUserModel.loggedInUser!.email! +
+                          " " +
+                          loggedInUserModel.loggedInUser!.uid!,
+                      style: TextStyle(
+                        backgroundColor: Colors.white,
+                      ),
+                    );
                   })
                 ],
               )),

@@ -18,7 +18,6 @@ class SelectionActivityTwoPage extends StatefulWidget {
 }
 
 class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
-  
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   var correctAnswer = false;
@@ -74,7 +73,7 @@ class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
               Visibility(
                 visible: correctAnswer,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 450.0, left: 400.0),
+                  padding: const EdgeInsets.only(top: 450.0, left: 660.0),
                   child: Image.asset(
                     'videos/wonFree.gif',
                     height: 200.0,
@@ -84,19 +83,22 @@ class _SelectionActivityTwoPageState extends State<SelectionActivityTwoPage> {
               ),
               Visibility(
                 visible: incorrectAnswer,
-                child: Image.asset(
-                  'videos/wrong.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100.0, left: 60),
+                  child: Image.asset(
+                    'videos/wrong.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Positioned(
-                top: 150.0,
-                left: 200.0,
+                top: 130.0,
+                left: 600.0,
                 child: Image.asset(
                   'images/pencil.png',
-                  height: 350.0,
-                  width: 350.0,
+                  height: 400.0,
+                  width: 400.0,
                 ),
               ),
               Padding(

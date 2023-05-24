@@ -17,9 +17,8 @@ class ColorSelection extends StatefulWidget {
 }
 
 class _ColorSelectionState extends State<ColorSelection> {
-
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
-  
+
   var correctAnswer = false;
   var incorrectAnswer = false;
 
@@ -72,27 +71,33 @@ class _ColorSelectionState extends State<ColorSelection> {
               ),
               Visibility(
                 visible: correctAnswer,
-                child: Image.asset(
-                  'videos/wonFree.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 450.0, left: 390.0),
+                  child: Image.asset(
+                    'videos/wonFree.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Visibility(
                 visible: incorrectAnswer,
-                child: Image.asset(
-                  'videos/wrong.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100.0, left: 60),
+                  child: Image.asset(
+                    'videos/wrong.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Positioned(
                 top: 150,
-                left: 200,
+                left: 500,
                 child: Image.asset(
                   'images/car.jpeg',
-                  height: 350,
-                  width: 350,
+                  height: 360,
+                  width: 360,
                 ),
               ),
               Padding(

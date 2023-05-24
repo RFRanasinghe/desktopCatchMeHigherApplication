@@ -22,7 +22,7 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
   var incorrectAnswer = false;
 
   late AudioPlayer audioPlayer;
-  String audioUrl = 'pattern.mp3';
+  String audioUrl = 'audio/pattern.mp3';
 
   @override
   void initState() {
@@ -72,10 +72,13 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                 visible: correctAnswer,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 450.0, left: 930.0),
-                  child: Image.asset(
-                    'videos/wonFree.gif',
-                    height: 200.0,
-                    width: 200.0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 100.0, left: 60),
+                    child: Image.asset(
+                      'videos/wonFree.gif',
+                      height: 200.0,
+                      width: 200.0,
+                    ),
                   ),
                 ),
               ),
@@ -87,12 +90,12 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                     width: 200.0,
                   )),
               Positioned(
-                top: 30,
-                left: 600,
+                top: 160,
+                left: 590,
                 child: Image.asset(
-                  'images/pq3.jpg',
-                  height: 600,
-                  width: 600,
+                  'images/pattern3.jpg',
+                  height: 320,
+                  width: 320,
                 ),
               ),
               Padding(
@@ -181,9 +184,7 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                   children: <Widget>[
                     ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          incorrectAnswer = true;
-                        });
+                        handleCorrectButtonPress();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 67, 170, 254),
@@ -223,7 +224,9 @@ class _PatternThreeActivityState extends State<PatternThreeActivityPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        handleCorrectButtonPress();
+                        setState(() {
+                          incorrectAnswer = true;
+                        });
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 255, 192, 20),

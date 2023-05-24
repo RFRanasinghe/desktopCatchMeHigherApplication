@@ -22,7 +22,7 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
   var incorrectAnswer = false;
 
   late AudioPlayer audioPlayer;
-  String audioUrl = 'pattern.mp3';
+  String audioUrl = 'audio/pattern.mp3';
 
   @override
   void initState() {
@@ -81,18 +81,21 @@ class _PatternTwoActivityState extends State<PatternTwoActivity> {
               ),
               Visibility(
                   visible: incorrectAnswer,
-                  child: Image.asset(
-                    'videos/wrong.gif',
-                    height: 200.0,
-                    width: 200.0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 100.0, left: 60),
+                    child: Image.asset(
+                      'videos/wrong.gif',
+                      height: 200.0,
+                      width: 200.0,
+                    ),
                   )),
               Positioned(
-                top: 5,
-                left: 600,
+                top: 40,
+                left: 550,
                 child: Image.asset(
                   'images/pq2.jpg',
-                  height: 600,
-                  width: 600,
+                  height: 520,
+                  width: 520,
                 ),
               ),
               Padding(

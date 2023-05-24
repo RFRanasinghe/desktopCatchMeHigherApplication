@@ -22,7 +22,7 @@ class _CountTwoActivityState extends State<CountTwoActivity> {
   var incorrectAnswer = false;
 
   late AudioPlayer audioPlayer;
-  String audioUrl = 'teddybeararethere.mp3';
+  String audioUrl = 'audio/teddybearsarethere.mp3';
 
   @override
   void initState() {
@@ -81,14 +81,17 @@ class _CountTwoActivityState extends State<CountTwoActivity> {
               ),
               Visibility(
                 visible: incorrectAnswer,
-                child: Image.asset(
-                  'videos/wrong.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100.0, left: 60),
+                  child: Image.asset(
+                    'videos/wrong.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Positioned(
-                top: -30,
+                top: -20,
                 left: 500,
                 child: Image.asset(
                   'images/bear.png',

@@ -17,14 +17,13 @@ class CountingNumbers extends StatefulWidget {
 }
 
 class _CountingNumbersState extends State<CountingNumbers> {
-
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   var correctAnswer = false;
   var incorrectAnswer = false;
 
   late AudioPlayer audioPlayer;
-  String audioUrl = 'popsticksarethere.mp3';
+  String audioUrl = 'audio/popsticksarethere.mp3';
 
   @override
   void initState() {
@@ -83,10 +82,13 @@ class _CountingNumbersState extends State<CountingNumbers> {
               ),
               Visibility(
                 visible: incorrectAnswer,
-                child: Image.asset(
-                  'videos/wrong.gif',
-                  height: 200.0,
-                  width: 200.0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100.0, left: 60),
+                  child: Image.asset(
+                    'videos/wrong.gif',
+                    height: 200.0,
+                    width: 200.0,
+                  ),
                 ),
               ),
               Positioned(
@@ -309,7 +311,7 @@ class _CountingNumbersState extends State<CountingNumbers> {
     }
   }
 
-   Future<void> handleCorrectButtonPress() async {
+  Future<void> handleCorrectButtonPress() async {
     setState(() {
       correctAnswer = true;
     });
